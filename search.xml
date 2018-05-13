@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hexo博客搭建遇到的相关问题解答]]></title>
+    <url>%2F2018%2F05%2F13%2FHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94%2F</url>
+    <content type="text"><![CDATA[Q: 如何使用github的根目录访问Hexo搭建的博客网站? A: 建立与你用户名对应的仓库，仓库名如下： 1your_user_name.github.io Hexo 根配置文件如下： 12url: https://your_user_name.github.io/root: / 此时即可通过https://your_user_name.github.io访问，不用携带子路径。 Q: Hexo categories，tags，about页面不显示解决办法?A: 默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面： 12345hexo new page &quot;tags&quot;hexo new page &quot;categories&quot;hexo new page &quot;about&quot; 编辑 /tags/index.md /categories/index.md /about/index.md 1234567891011// tagstype: tagslayout: tags// categoriestype: categorieslayout: categories// abouttitle: aboutlayout: about 有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来 123// categories 我的主题categories页实际的layout名是category.ejstitle: categorieslayout: category Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?比如分类我们设置的是： 1categories: 前端 那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是： 1/categories/前端 A: 打开根目录下的配置文件 _config.yml ，找到如下位置做更改： 123456default_category: uncategorizedcategory_map: 前端: fontendtag_map: 测试: test 此时的访问路径将是： 12/categories/fontend//tags/test/]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[new-world]]></title>
     <url>%2F2018%2F05%2F12%2Fnew-world%2F</url>
-    <content type="text"><![CDATA[世界那么大 容我去看看]]></content>
+    <content type="text"><![CDATA[世界那么大]]></content>
       <categories>
         <category>世界那么大</category>
       </categories>
@@ -16,6 +27,12 @@
     <title><![CDATA[Hello World]]></title>
     <url>%2F2018%2F05%2F12%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Hello，World!你好，世界！]]></title>
@@ -36,7 +53,8 @@
         <category>随笔</category>
       </categories>
       <tags>
-        <tag>写作</tag>
+        <tag>随笔</tag>
+        <tag>即兴</tag>
       </tags>
   </entry>
 </search>
