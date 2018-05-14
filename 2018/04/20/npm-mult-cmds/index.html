@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Npm 同时执行多条监听命令 |   Felinae </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css">
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="https://unpkg.com/valine@1.1.9-beta9/dist/Valine.min.js"></script>
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <a class="header-logo" href="/">Felinae</a>  
+
+    <div class="header-menu">          
+              
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">时间轴</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-categories" href="/categories">分类</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+
+            
+                
+    </div>  
+    
+  </nav>
+</header>   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		npm 同时执行多条监听命令
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		4月 20, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			392
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<p>在全栈开发中，难免会遇到同时需启动多个服务，按照常规的方式需要开启多个窗口，这样难免有些麻烦。<br>下面介绍一种只需要一条npm执行多条命令，即可开启多个服务：<br><a id="more"></a></p>
+<h4 id="1-安装-concurrently"><a href="#1-安装-concurrently" class="headerlink" title="1.安装 concurrently:"></a>1.安装 concurrently:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g concurrently</span><br></pre></td></tr></table></figure>
+<h4 id="2-更改package-json的-scripts"><a href="#2-更改package-json的-scripts" class="headerlink" title="2.更改package.json的 scripts:"></a>2.更改package.json的 scripts:</h4><p> 方便同时启动多个服务，此时后端的代码是在前端代码中的一个目录，这样方便操作。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "client": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",</span><br><span class="line">    "server" : "node node/bin/www",</span><br><span class="line">    "start": "concurrent \"npm run client\" \"npm run server\""</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动:"></a>3.启动:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/10832850-a5973af4f54c7b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信截图_20180420105210.png"></p>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      
+        <i class="iconfont icon-category"></i>       
+        <a class="category-link" href="/categories/技术/">技术</a> <a class="category-link" href="/categories/技术/fontend/">前端</a> 	
+     
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/npm/">npm</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.jpg">
+      <p class="pf-des">hi,😐😐😐</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+        
+
+
+
+
+<span class="donate-btn">
+	<span class="iconfont icon-donate"></span>
+</span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="noLazyLoad donate-img" src="/images/donate1.png" alt="No Donate Image!">	
+		<img id="donate-qr-alipay" class="noLazyLoad donate-img" src="/images/donate2.png" alt="No Donate Image!">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+        
+      </div>  
+    <nav class="pf-paginator">
+      
+         
+          <a href="/2018/05/13/Hexo博客搭建遇到的相关问题解答/" data-hover="Hexo博客搭建遇到的相关问题解答">上一篇</a>      
+            
+        
+      
+        
+        <a href="/2018/03/10/forbid-scrolling/" data-hover="移动端弹出遮罩层后 禁止页面滚动"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div>
+<div id="comment"></div> 
+	
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+       <a href="/">
+      <img class="mobile-menu-icon" src="/images/favicon.png">
+       </a>
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">时间轴
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/categories">分类
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+
+     
+    
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">	    
+
+
+		<div class="footer-copyright">
+		&copy;
+				
+		2017-
+		
+		2018
+
+		Jordon Wang
+			<br>
+			<span id="busuanzi_container_site_pv">
+				<span class="iconfont icon-pv"></span>
+				<span id="busuanzi_value_site_pv"></span>
+			</span> |
+			<span id="busuanzi_container_site_uv">
+				<span class="iconfont icon-uv"></span>
+				<span id="busuanzi_value_site_uv"></span>
+			</span>
+		<br>
+			Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+			Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>

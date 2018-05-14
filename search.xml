@@ -3,8 +3,9 @@
   <entry>
     <title><![CDATA[Hexo博客搭建遇到的相关问题解答]]></title>
     <url>%2F2018%2F05%2F13%2FHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94%2F</url>
-    <content type="text"><![CDATA[Q: 如何使用github的根目录访问Hexo搭建的博客网站? A: 建立与你用户名对应的仓库，仓库名如下： 1your_user_name.github.io Hexo 根配置文件如下： 12url: https://your_user_name.github.io/root: / 此时即可通过https://your_user_name.github.io访问，不用携带子路径。 Q: Hexo categories，tags，about页面不显示解决办法?A: 默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面： 12345hexo new page &quot;tags&quot;hexo new page &quot;categories&quot;hexo new page &quot;about&quot; 编辑 /tags/index.md /categories/index.md /about/index.md 1234567891011// tagstype: tagslayout: tags// categoriestype: categorieslayout: categories// abouttitle: aboutlayout: about 有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来 123// categories 我的主题categories页实际的layout名是category.ejstitle: categorieslayout: category Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?比如分类我们设置的是： 1categories: 前端 那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是： 1/categories/前端 A: 打开根目录下的配置文件 _config.yml ，找到如下位置做更改： 123456default_category: uncategorizedcategory_map: 前端: fontendtag_map: 测试: test 此时的访问路径将是： 12/categories/fontend//tags/test/]]></content>
+    <content type="text"><![CDATA[Q: 如何使用github的根目录访问Hexo搭建的博客网站? A: 建立与你用户名对应的仓库，仓库名如下： 1your_user_name.github.io Hexo 根配置文件如下： 12url: https://your_user_name.github.io/root: / 此时即可通过https://your_user_name.github.io访问，不用携带子路径。 Q: Hexo categories，tags，about页面不显示解决办法?A: 默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面： 12345hexo new page "tags"hexo new page "categories"hexo new page "about" 编辑 /tags/index.md /categories/index.md /about/index.md 1234567891011// tagstype: tagslayout: tags// categoriestype: categorieslayout: categories// abouttitle: aboutlayout: about 有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来 123// categories 我的主题categories页实际的layout名是category.ejstitle: categorieslayout: category Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?比如分类我们设置的是： 1categories: 前端 那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是： 1/categories/前端 A: 打开根目录下的配置文件 _config.yml ，找到如下位置做更改： 123456default_category: uncategorizedcategory_map: 前端: fontendtag_map: 测试: test 此时的访问路径将是： 12/categories/fontend//tags/test/ Q: Hexo主题中如何实现多级分类？A: 在主题文件夹中找到 layout/category.ejs 文件，修改成如下所示：123456&lt;% if (site.categories.length)&#123; %&gt;&lt;div class="widget tag"&gt; &lt;h3 class="title"&gt;&lt;%= __('categories') %&gt;&lt;/h3&gt; &lt;%- list_categories(site.categories) %&gt;&lt;/div&gt;&lt;% &#125; %&gt; 如果不显示多级分类了，只需设置list_categories函数的参数即可list_categories(site.categories,{depth: 1}) 这样就只会显示一级分类了。]]></content>
       <categories>
+        <category>技术</category>
         <category>前端</category>
       </categories>
       <tags>
@@ -12,49 +13,41 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[new-world]]></title>
-    <url>%2F2018%2F05%2F12%2Fnew-world%2F</url>
-    <content type="text"><![CDATA[世界那么大]]></content>
+    <title><![CDATA[npm 同时执行多条监听命令]]></title>
+    <url>%2F2018%2F04%2F20%2Fnpm-mult-cmds%2F</url>
+    <content type="text"><![CDATA[在全栈开发中，难免会遇到同时需启动多个服务，按照常规的方式需要开启多个窗口，这样难免有些麻烦。下面介绍一种只需要一条npm执行多条命令，即可开启多个服务： 1.安装 concurrently:1npm install -g concurrently 2.更改package.json的 scripts: 方便同时启动多个服务，此时后端的代码是在前端代码中的一个目录，这样方便操作。12345"scripts": &#123; "client": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", "server" : "node node/bin/www", "start": "concurrent \"npm run client\" \"npm run server\"" &#125; 3.启动:1npm run start]]></content>
       <categories>
-        <category>世界那么大</category>
-      </categories>
-      <tags>
-        <tag>新世界</tag>
-        <tag>理想三旬</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F05%2F12%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-      <categories>
+        <category>技术</category>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>Hexo</tag>
+        <tag>npm</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello，World!你好，世界！]]></title>
-    <url>%2F2015%2F01%2F21%2F%E6%B5%8B%E8%AF%95%E6%96%B0%E6%96%87%E7%AB%A02%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[移动端弹出遮罩层后 禁止页面滚动]]></title>
+    <url>%2F2018%2F03%2F10%2Fforbid-scrolling%2F</url>
+    <content type="text"><![CDATA[在开发移动web的时候，相信大家都会遇到当有 fixed定位遮罩层弹出时，在屏幕上滑动能够滑动背景下面的内容，这在大部分场景下都不是和友好的，解决方法如下： 1. CSS overflow:hidden一般这种情况如果需要阻止滚动嘴简单的方法就是弹层弹出后，给body设置样式 overflow:hidden;在弹层隐藏的同时去掉加上的css, 不过这种并不适用与body的高度刚好是页面的高度，实际下层穿透滚动的元素是在body中的其他元素。 不能完全禁止，还是会有元素可以滚动。123body&#123; overflow:hidden&#125; 2. JS preventDefault监听touchmove事件并阻止默认事件123document.getElementById('mask').addEventListener('touchmove', function (event) &#123; event.preventDefault();&#125;)]]></content>
       <categories>
+        <category>技术</category>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>技术</tag>
+        <tag>WEB前端</tag>
+        <tag>HTML5</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hello，World!你好，世界！]]></title>
-    <url>%2F2014%2F01%2F21%2F%E6%B5%8B%E8%AF%95%E6%96%B0%E6%96%87%E7%AB%A0%2F</url>
-    <content type="text"></content>
+    <title><![CDATA[iOS web html5 移动端 软键盘弹起遮挡输入框 输入框定位不准确]]></title>
+    <url>%2F2017%2F12%2F14%2Fios-web-input%2F</url>
+    <content type="text"><![CDATA[移动web当有输入框fixed定位在底部的时候，点击输入，弹起软键盘，iOS在将页面推上的时候会回弹一下，导致键盘刚好遮挡到输入框。而且在页面不同高度弹起的键盘对输入框的位置还不一样。（所受影响的元素此时是fixed定位）。 1. 当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。 代码如下：12345678910111213if(isiOS)&#123; $(document).on("focusin",function()&#123; // $('.postMsgBg') 输入框 $('.postMsgBg').css('position','relative') var clientHeight= document.body.clientHeight; setTimeout(function()&#123; $(window).scrollTop(clientHeight); &#125;,300); &#125;); $(document).on('focusout', function () &#123; $('.postMsgBg').css('position','fixed') &#125;);&#125;; 以上的方法是可以解决弹起键盘后输入框乱跳的问题，但是每次都会跳到屏幕的最下方，这样会比较突兀，相对体验不是很友好。 2. 在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。123456789101112131415161718192021222324&lt;body&gt; &lt;div class='warper'&gt; &lt;div class='content'&gt;&lt;/div&gt; &lt;div&gt; &lt;div class="fix-bottom"&gt;&lt;/div&gt;&lt;/body&gt;&lt;style&gt; .warper&#123; position: absolute; width: 100%; left: 0; right: 0; top: 0; bottom: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;/* 解决ios滑动不流畅问题 */ &#125; .fix-bottom&#123; position:fixed; bottom:0; width: 100%; &#125;&lt;/style&gt;]]></content>
       <categories>
-        <category>随笔</category>
+        <category>技术</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
-        <tag>即兴</tag>
+        <tag>WEB前端</tag>
+        <tag>HTML5</tag>
       </tags>
   </entry>
 </search>

@@ -88,7 +88,7 @@
 	
 		<i class="iconfont icon-words"></i>
 		<span>
-			984
+			1319
 		</span>
 	
 </div>
@@ -104,12 +104,12 @@
 					<h4 id="Q-如何使用github的根目录访问Hexo搭建的博客网站"><a href="#Q-如何使用github的根目录访问Hexo搭建的博客网站" class="headerlink" title="Q: 如何使用github的根目录访问Hexo搭建的博客网站?"></a>Q: 如何使用github的根目录访问Hexo搭建的博客网站?</h4><a id="more"></a>
 <h5 id="A"><a href="#A" class="headerlink" title="A:"></a>A:</h5><ol>
 <li><p>建立与你用户名对应的仓库，仓库名如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_user_name.github.io</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_user_name<span class="selector-class">.github</span><span class="selector-class">.io</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Hexo 根配置文件如下：</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url: https://your_user_name.github.io/</span><br><span class="line">root: /</span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">url:</span> <span class="string">https:</span><span class="comment">//your_user_name.github.io/</span></span><br><span class="line"><span class="string">root:</span> /</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li>此时即可通过<a href="https://your_user_name.github.io/" target="_blank" rel="noopener">https://your_user_name.github.io</a>访问，不用携带子路径。</li>
 </ol>
@@ -117,29 +117,36 @@
 <h4 id="Q-Hexo-categories，tags，about页面不显示解决办法"><a href="#Q-Hexo-categories，tags，about页面不显示解决办法" class="headerlink" title="Q: Hexo categories，tags，about页面不显示解决办法?"></a>Q: Hexo categories，tags，about页面不显示解决办法?</h4><h5 id="A-1"><a href="#A-1" class="headerlink" title="A:"></a>A:</h5><ol>
 <li>默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面：</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br><span class="line"></span><br><span class="line">hexo new page &quot;categories&quot;</span><br><span class="line"></span><br><span class="line">hexo new page &quot;about&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new<span class="built_in"> page </span><span class="string">"tags"</span></span><br><span class="line"></span><br><span class="line">hexo new<span class="built_in"> page </span><span class="string">"categories"</span></span><br><span class="line"></span><br><span class="line">hexo new<span class="built_in"> page </span><span class="string">"about"</span></span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li><p>编辑 /tags/index.md  /categories/index.md  /about/index.md</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// tags</span><br><span class="line">type: tags</span><br><span class="line">layout: tags</span><br><span class="line"></span><br><span class="line">// categories</span><br><span class="line">type: categories</span><br><span class="line">layout: categories</span><br><span class="line"></span><br><span class="line">// about</span><br><span class="line">title: about</span><br><span class="line">layout: about</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tags</span></span><br><span class="line"><span class="symbol">type:</span> tags</span><br><span class="line"><span class="symbol">layout:</span> tags</span><br><span class="line"></span><br><span class="line"><span class="comment">// categories</span></span><br><span class="line"><span class="symbol">type:</span> categories</span><br><span class="line"><span class="symbol">layout:</span> categories</span><br><span class="line"></span><br><span class="line"><span class="comment">// about</span></span><br><span class="line"><span class="symbol">title:</span> about</span><br><span class="line"><span class="symbol">layout:</span> about</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// categories 我的主题categories页实际的layout名是category.ejs</span><br><span class="line">title: categories</span><br><span class="line">layout: category</span><br></pre></td></tr></table></figure>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// categories 我的主题categories页实际的layout名是category.ejs</span></span><br><span class="line"><span class="symbol">title:</span> categories</span><br><span class="line"><span class="symbol">layout:</span> category</span><br></pre></td></tr></table></figure>
 <hr>
 <h4 id="Q-Hexo-categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名"><a href="#Q-Hexo-categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名" class="headerlink" title="Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?"></a>Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?</h4><p>比如分类我们设置的是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">categories: 前端</span><br></pre></td></tr></table></figure>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">categories:</span> 前端</span><br></pre></td></tr></table></figure>
 <p>那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/categories/前端</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/categories/</span>前端</span><br></pre></td></tr></table></figure>
 <h5 id="A-2"><a href="#A-2" class="headerlink" title="A:"></a>A:</h5><ol>
 <li><p>打开根目录下的配置文件 _config.yml ，找到如下位置做更改：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">default_category: uncategorized</span><br><span class="line"></span><br><span class="line">category_map:</span><br><span class="line">	前端: fontend</span><br><span class="line">tag_map:</span><br><span class="line">    测试: test</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">default_category</span>: uncategorized</span><br><span class="line"></span><br><span class="line"><span class="attribute">category_map:</span></span><br><span class="line">    前端: fontend</span><br><span class="line"><span class="attribute">tag_map:</span></span><br><span class="line">    测试: test</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>此时的访问路径将是：</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/categories/fontend/</span><br><span class="line">/tags/test/</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/categories/fontend/</span></span><br><span class="line"><span class="regexp">/tags/test/</span></span><br></pre></td></tr></table></figure>
 <hr>
+<h4 id="Q-Hexo主题中如何实现多级分类？"><a href="#Q-Hexo主题中如何实现多级分类？" class="headerlink" title="Q: Hexo主题中如何实现多级分类？"></a>Q: Hexo主题中如何实现多级分类？</h4><h5 id="A-3"><a href="#A-3" class="headerlink" title="A:"></a>A:</h5><ol>
+<li>在主题文件夹中找到 layout/category.ejs 文件，修改成如下所示：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (site.categories.length)&#123; %&gt;</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"widget tag"</span>&gt;</span><br><span class="line">  &lt;h3 <span class="class"><span class="keyword">class</span></span>=<span class="string">"title"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">__</span>('<span class="attr">categories</span>') %&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line">     &lt;%- list_categories(site.categories) %&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;% &#125; %&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>如果不显示多级分类了，只需设置list_categories函数的参数即可<br>list_categories(site.categories,{depth: 1}) 这样就只会显示一级分类了。</p>
+</blockquote>
   	
 					
 	  </div>     
@@ -149,7 +156,7 @@
 <div class="post-meta">
       
         <i class="iconfont icon-category"></i>       
-        <a class="category-link" href="/categories/fontend/">前端</a> 	
+        <a class="category-link" href="/categories/技术/">技术</a> <a class="category-link" href="/categories/技术/fontend/">前端</a> 	
      
       	
 
@@ -166,7 +173,7 @@
 <div class="post-footer">
   <div class="pf-left">
       <img class="pf-avatar" src="/images/header.jpg">
-      <p class="pf-des">hi,i am lemon</p>
+      <p class="pf-des">hi,😐😐😐</p>
   </div>
 
   <div class="pf-right">           
@@ -207,7 +214,7 @@
         
       
         
-        <a href="/2018/05/12/new-world/" data-hover="new-world"> 下一篇</a>
+        <a href="/2018/04/20/npm-mult-cmds/" data-hover="npm 同时执行多条监听命令"> 下一篇</a>
             
   </nav>   
   </div>
@@ -300,14 +307,17 @@
 
 		<div class="footer-copyright">
 		&copy;
+				
+		2017-
 		
-		2018		
-	
+		2018
+
 		Jordon Wang
+			<br>
 			<span id="busuanzi_container_site_pv">
 				<span class="iconfont icon-pv"></span>
 				<span id="busuanzi_value_site_pv"></span>
-			</span>
+			</span> |
 			<span id="busuanzi_container_site_uv">
 				<span class="iconfont icon-uv"></span>
 				<span id="busuanzi_value_site_uv"></span>
