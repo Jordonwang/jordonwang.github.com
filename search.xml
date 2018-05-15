@@ -1,103 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title>Hexo博客搭建遇到的相关问题解答</title>
-      <link href="/2018/05/13/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/"/>
-      <url>/2018/05/13/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94/</url>
-      <content type="html"><![CDATA[<h4 id="Q-如何使用github的根目录访问Hexo搭建的博客网站"><a href="#Q-如何使用github的根目录访问Hexo搭建的博客网站" class="headerlink" title="Q: 如何使用github的根目录访问Hexo搭建的博客网站?"></a>Q: 如何使用github的根目录访问Hexo搭建的博客网站?</h4><a id="more"></a><h5 id="A"><a href="#A" class="headerlink" title="A:"></a>A:</h5><ol><li><p>建立与你用户名对应的仓库，仓库名如下：</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_user_name<span class="selector-class">.github</span><span class="selector-class">.io</span></span><br></pre></td></tr></table></figure></li><li><p>Hexo 根配置文件如下：</p></li></ol><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">url:</span> <span class="string">https:</span><span class="comment">//your_user_name.github.io/</span></span><br><span class="line"><span class="string">root:</span> /</span><br></pre></td></tr></table></figure><ol start="3"><li>此时即可通过<a href="https://your_user_name.github.io/" target="_blank" rel="noopener">https://your_user_name.github.io</a>访问，不用携带子路径。</li></ol><hr><h4 id="Q-Hexo-categories，tags，about页面不显示解决办法"><a href="#Q-Hexo-categories，tags，about页面不显示解决办法" class="headerlink" title="Q: Hexo categories，tags，about页面不显示解决办法?"></a>Q: Hexo categories，tags，about页面不显示解决办法?</h4><h5 id="A-1"><a href="#A-1" class="headerlink" title="A:"></a>A:</h5><ol><li>默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面：</li></ol><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new<span class="built_in"> page </span><span class="string">"tags"</span></span><br><span class="line"></span><br><span class="line">hexo new<span class="built_in"> page </span><span class="string">"categories"</span></span><br><span class="line"></span><br><span class="line">hexo new<span class="built_in"> page </span><span class="string">"about"</span></span><br></pre></td></tr></table></figure><ol start="2"><li><p>编辑 /tags/index.md  /categories/index.md  /about/index.md</p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tags</span></span><br><span class="line"><span class="symbol">type:</span> tags</span><br><span class="line"><span class="symbol">layout:</span> tags</span><br><span class="line"></span><br><span class="line"><span class="comment">// categories</span></span><br><span class="line"><span class="symbol">type:</span> categories</span><br><span class="line"><span class="symbol">layout:</span> categories</span><br><span class="line"></span><br><span class="line"><span class="comment">// about</span></span><br><span class="line"><span class="symbol">title:</span> about</span><br><span class="line"><span class="symbol">layout:</span> about</span><br></pre></td></tr></table></figure></li><li><p>有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来</p></li></ol><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// categories 我的主题categories页实际的layout名是category.ejs</span></span><br><span class="line"><span class="symbol">title:</span> categories</span><br><span class="line"><span class="symbol">layout:</span> category</span><br></pre></td></tr></table></figure><hr><h4 id="Q-Hexo-categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名"><a href="#Q-Hexo-categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名" class="headerlink" title="Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?"></a>Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?</h4><p>比如分类我们设置的是：</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">categories:</span> 前端</span><br></pre></td></tr></table></figure><p>那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/categories/</span>前端</span><br></pre></td></tr></table></figure><h5 id="A-2"><a href="#A-2" class="headerlink" title="A:"></a>A:</h5><ol><li><p>打开根目录下的配置文件 _config.yml ，找到如下位置做更改：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">default_category</span>: uncategorized</span><br><span class="line"></span><br><span class="line"><span class="attribute">category_map:</span></span><br><span class="line">    前端: fontend</span><br><span class="line"><span class="attribute">tag_map:</span></span><br><span class="line">    测试: test</span><br></pre></td></tr></table></figure></li><li><p>此时的访问路径将是：</p></li></ol><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/categories/fontend/</span></span><br><span class="line"><span class="regexp">/tags/test/</span></span><br></pre></td></tr></table></figure><hr><h4 id="Q-Hexo主题中如何实现多级分类？"><a href="#Q-Hexo主题中如何实现多级分类？" class="headerlink" title="Q: Hexo主题中如何实现多级分类？"></a>Q: Hexo主题中如何实现多级分类？</h4><h5 id="A-3"><a href="#A-3" class="headerlink" title="A:"></a>A:</h5><ol><li>在主题文件夹中找到 layout/category.ejs 文件，修改成如下所示：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;% <span class="keyword">if</span> (site.categories.length)&#123; %&gt;</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"widget tag"</span>&gt;</span><br><span class="line">  &lt;h3 <span class="class"><span class="keyword">class</span></span>=<span class="string">"title"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">__</span>('<span class="attr">categories</span>') %&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line">     &lt;%- list_categories(site.categories) %&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;% &#125; %&gt;</span></span><br></pre></td></tr></table></figure></li></ol><blockquote><p>如果不显示多级分类了，只需设置list_categories函数的参数即可<br>list_categories(site.categories,{depth: 1}) 这样就只会显示一级分类了。</p></blockquote>]]></content>
-      
+<search>
+  <entry>
+    <title><![CDATA[Hexo博客搭建遇到的相关问题解答]]></title>
+    <url>%2F2018%2F05%2F13%2FHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94%2F</url>
+    <content type="text"><![CDATA[Q: 如何使用github的根目录访问Hexo搭建的博客网站? A: 建立与你用户名对应的仓库，仓库名如下： 1your_user_name.github.io Hexo 根配置文件如下： 12url: https://your_user_name.github.io/root: / 此时即可通过https://your_user_name.github.io访问，不用携带子路径。 Q: Hexo categories，tags，about页面不显示解决办法?A: 默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面： 12345hexo new page "tags"hexo new page "categories"hexo new page "about" 编辑 /tags/index.md /categories/index.md /about/index.md 1234567891011// tagstype: tagslayout: tags// categoriestype: categorieslayout: categories// abouttitle: aboutlayout: about 有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来 123// categories 我的主题categories页实际的layout名是category.ejstitle: categorieslayout: category Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?比如分类我们设置的是： 1categories: 前端 那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是： 1/categories/前端 A: 打开根目录下的配置文件 _config.yml ，找到如下位置做更改： 123456default_category: uncategorizedcategory_map: 前端: fontendtag_map: 测试: test 此时的访问路径将是： 12/categories/fontend//tags/test/ Q: Hexo主题中如何实现多级分类？A: 在主题文件夹中找到 layout/category.ejs 文件，修改成如下所示：123456&lt;% if (site.categories.length)&#123; %&gt;&lt;div class="widget tag"&gt; &lt;h3 class="title"&gt;&lt;%= __('categories') %&gt;&lt;/h3&gt; &lt;%- list_categories(site.categories) %&gt;&lt;/div&gt;&lt;% &#125; %&gt; 如果不显示多级分类了，只需设置list_categories函数的参数即可list_categories(site.categories,{depth: 1}) 这样就只会显示一级分类了。]]></content>
       <categories>
-          
-          <category> 技术 </category>
-          
-          <category> 前端 </category>
-          
+        <category>技术</category>
+        <category>前端</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>npm 同时执行多条监听命令</title>
-      <link href="/2018/04/20/npm-mult-cmds/"/>
-      <url>/2018/04/20/npm-mult-cmds/</url>
-      <content type="html"><![CDATA[<p>在全栈开发中，难免会遇到同时需启动多个服务，按照常规的方式需要开启多个窗口，这样难免有些麻烦。<br>下面介绍一种只需要一条npm执行多条命令，即可开启多个服务：<br><a id="more"></a></p><h4 id="1-安装-concurrently"><a href="#1-安装-concurrently" class="headerlink" title="1.安装 concurrently:"></a>1.安装 concurrently:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g concurrently</span><br></pre></td></tr></table></figure><h4 id="2-更改package-json的-scripts"><a href="#2-更改package-json的-scripts" class="headerlink" title="2.更改package.json的 scripts:"></a>2.更改package.json的 scripts:</h4><p> 方便同时启动多个服务，此时后端的代码是在前端代码中的一个目录，这样方便操作。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "client": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",</span><br><span class="line">    "server" : "node node/bin/www",</span><br><span class="line">    "start": "concurrent \"npm run client\" \"npm run server\""</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p><h4 id="3-启动"><a href="#3-启动" class="headerlink" title="3.启动:"></a>3.启动:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start</span><br></pre></td></tr></table></figure><p><img src="https://upload-images.jianshu.io/upload_images/10832850-a5973af4f54c7b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信截图_20180420105210.png"></p>]]></content>
-      
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[npm 同时执行多条监听命令]]></title>
+    <url>%2F2018%2F04%2F20%2Fnpm-mult-cmds%2F</url>
+    <content type="text"><![CDATA[在全栈开发中，难免会遇到同时需启动多个服务，按照常规的方式需要开启多个窗口，这样难免有些麻烦。下面介绍一种只需要一条npm执行多条命令，即可开启多个服务： 1.安装 concurrently:1npm install -g concurrently 2.更改package.json的 scripts: 方便同时启动多个服务，此时后端的代码是在前端代码中的一个目录，这样方便操作。12345"scripts": &#123; "client": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", "server" : "node node/bin/www", "start": "concurrent \"npm run client\" \"npm run server\"" &#125; 3.启动:1npm run start]]></content>
       <categories>
-          
-          <category> 技术 </category>
-          
-          <category> 前端 </category>
-          
+        <category>技术</category>
+        <category>前端</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> npm </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>移动端弹出遮罩层后 禁止页面滚动</title>
-      <link href="/2018/03/10/forbid-scrolling/"/>
-      <url>/2018/03/10/forbid-scrolling/</url>
-      <content type="html"><![CDATA[<p>在开发移动web的时候，相信大家都会遇到当有 fixed定位遮罩层弹出时，在屏幕上滑动能够滑动背景下面的内容，这在大部分场景下都不是和友好的，解决方法如下：<br><a id="more"></a></p><h4 id="1-CSS-overflow-hidden"><a href="#1-CSS-overflow-hidden" class="headerlink" title="1.  CSS overflow:hidden"></a>1.  CSS overflow:hidden</h4><p>一般这种情况如果需要阻止滚动嘴简单的方法就是弹层弹出后，给body设置样式 overflow:hidden;在弹层隐藏的同时去掉加上的css, 不过这种并不适用与body的高度刚好是页面的高度，实际下层穿透滚动的元素是在body中的其他元素。 不能完全禁止，还是会有元素可以滚动。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h4 id="2-JS-preventDefault"><a href="#2-JS-preventDefault" class="headerlink" title="2. JS preventDefault"></a>2. JS preventDefault</h4><p>监听touchmove事件并阻止默认事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'mask'</span>).addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">       event.preventDefault();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>]]></content>
-      
+      <tags>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[移动端弹出遮罩层后 禁止页面滚动]]></title>
+    <url>%2F2018%2F03%2F10%2Fforbid-scrolling%2F</url>
+    <content type="text"><![CDATA[在开发移动web的时候，相信大家都会遇到当有 fixed定位遮罩层弹出时，在屏幕上滑动能够滑动背景下面的内容，这在大部分场景下都不是和友好的，解决方法如下： 1. CSS overflow:hidden一般这种情况如果需要阻止滚动嘴简单的方法就是弹层弹出后，给body设置样式 overflow:hidden;在弹层隐藏的同时去掉加上的css, 不过这种并不适用与body的高度刚好是页面的高度，实际下层穿透滚动的元素是在body中的其他元素。 不能完全禁止，还是会有元素可以滚动。123body&#123; overflow:hidden&#125; 2. JS preventDefault监听touchmove事件并阻止默认事件123document.getElementById('mask').addEventListener('touchmove', function (event) &#123; event.preventDefault();&#125;)]]></content>
       <categories>
-          
-          <category> 技术 </category>
-          
-          <category> 前端 </category>
-          
+        <category>技术</category>
+        <category>前端</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> WEB前端 </tag>
-            
-            <tag> HTML5 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>iOS web html5 移动端 软键盘弹起遮挡输入框 输入框定位不准确</title>
-      <link href="/2017/12/14/ios-web-input/"/>
-      <url>/2017/12/14/ios-web-input/</url>
-      <content type="html"><![CDATA[<p>移动web当有输入框fixed定位在底部的时候，点击输入，弹起软键盘，iOS在将页面推上的时候会回弹一下，导致键盘刚好遮挡到输入框。而且在页面不同高度弹起的键盘对输入框的位置还不一样。（所受影响的元素此时是fixed定位）。<br><a id="more"></a></p><h4 id="1-当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。"><a href="#1-当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。" class="headerlink" title="1. 当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。"></a>1. 当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。</h4><p><img src="https://upload-images.jianshu.io/upload_images/10832850-48491caaef3d5b3f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="触发留言之前的界面.jpg"></p><p><img src="https://upload-images.jianshu.io/upload_images/10832850-a26f05498f52e1e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="换起输入框之后的界面.jpg"><br>代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(isiOS)&#123;</span><br><span class="line">    $(<span class="built_in">document</span>).on(<span class="string">"focusin"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// $('.postMsgBg') 输入框</span></span><br><span class="line">        $(<span class="string">'.postMsgBg'</span>).css(<span class="string">'position'</span>,<span class="string">'relative'</span>)</span><br><span class="line">        <span class="keyword">var</span> clientHeight= <span class="built_in">document</span>.body.clientHeight;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            $(<span class="built_in">window</span>).scrollTop(clientHeight);</span><br><span class="line">        &#125;,<span class="number">300</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    $(<span class="built_in">document</span>).on(<span class="string">'focusout'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">         $(<span class="string">'.postMsgBg'</span>).css(<span class="string">'position'</span>,<span class="string">'fixed'</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>以上的方法是可以解决弹起键盘后输入框乱跳的问题，但是每次都会跳到屏幕的最下方，这样会比较突兀，相对体验不是很友好。</p><h4 id="2-在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。"><a href="#2-在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。" class="headerlink" title="2. 在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。"></a>2. 在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'warper'</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'content'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fix-bottom"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-class">.warper</span>&#123;</span></span><br><span class="line"><span class="undefined">          position: absolute;</span></span><br><span class="line"><span class="undefined">          width: 100%;</span></span><br><span class="line"><span class="undefined">          left: 0;</span></span><br><span class="line"><span class="undefined">          right: 0;</span></span><br><span class="line"><span class="undefined">          top: 0;</span></span><br><span class="line"><span class="undefined">          bottom: 0;</span></span><br><span class="line"><span class="undefined">          overflow-y: scroll;</span></span><br><span class="line"><span class="css">          <span class="selector-tag">-webkit-overflow-scrolling</span>: <span class="selector-tag">touch</span>;<span class="comment">/* 解决ios滑动不流畅问题 */</span></span></span><br><span class="line"><span class="undefined">     &#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.fix-bottom</span>&#123;</span></span><br><span class="line"><span class="css">         <span class="selector-tag">position</span><span class="selector-pseudo">:fixed</span>;</span></span><br><span class="line"><span class="css">         <span class="selector-tag">bottom</span><span class="selector-pseudo">:0</span>;</span></span><br><span class="line"><span class="undefined">         width: 100%;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      
+      <tags>
+        <tag>WEB前端</tag>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[iOS web html5 移动端 软键盘弹起遮挡输入框 输入框定位不准确]]></title>
+    <url>%2F2017%2F12%2F14%2Fios-web-input%2F</url>
+    <content type="text"><![CDATA[移动web当有输入框fixed定位在底部的时候，点击输入，弹起软键盘，iOS在将页面推上的时候会回弹一下，导致键盘刚好遮挡到输入框。而且在页面不同高度弹起的键盘对输入框的位置还不一样。（所受影响的元素此时是fixed定位）。 1. 当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。 代码如下：12345678910111213if(isiOS)&#123; $(document).on("focusin",function()&#123; // $('.postMsgBg') 输入框 $('.postMsgBg').css('position','relative') var clientHeight= document.body.clientHeight; setTimeout(function()&#123; $(window).scrollTop(clientHeight); &#125;,300); &#125;); $(document).on('focusout', function () &#123; $('.postMsgBg').css('position','fixed') &#125;);&#125;; 以上的方法是可以解决弹起键盘后输入框乱跳的问题，但是每次都会跳到屏幕的最下方，这样会比较突兀，相对体验不是很友好。 2. 在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。123456789101112131415161718192021222324&lt;body&gt; &lt;div class='warper'&gt; &lt;div class='content'&gt;&lt;/div&gt; &lt;div&gt; &lt;div class="fix-bottom"&gt;&lt;/div&gt;&lt;/body&gt;&lt;style&gt; .warper&#123; position: absolute; width: 100%; left: 0; right: 0; top: 0; bottom: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;/* 解决ios滑动不流畅问题 */ &#125; .fix-bottom&#123; position:fixed; bottom:0; width: 100%; &#125;&lt;/style&gt;]]></content>
       <categories>
-          
-          <category> 技术 </category>
-          
-          <category> 前端 </category>
-          
+        <category>技术</category>
+        <category>前端</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> WEB前端 </tag>
-            
-            <tag> HTML5 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-  
-  
+      <tags>
+        <tag>WEB前端</tag>
+        <tag>HTML5</tag>
+      </tags>
+  </entry>
 </search>
