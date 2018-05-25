@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  移动端Web Video视频播放兼容处理 |   Felinae </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css">
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="https://unpkg.com/valine@1.1.9-beta9/dist/Valine.min.js"></script>
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <a class="header-logo" href="/">Felinae</a>  
+
+    <div class="header-menu header-menu-block">
+              
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">时间轴</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <!--<a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>-->
+
+            
+                
+    </div>  
+    <div class="header-menu">
+        <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+    </div>
+  </nav>
+</header>   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		移动端Web Video视频播放兼容处理
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		5月 25, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			2103
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<blockquote>
+<p>最近因为项目中用到了视频播放，所以使用了HTML5中的video标签，但是遇到了的各种兼容问题。背景：项目运行在支付宝内的网页，被第三方测试机构测出安卓和IOS中视觉不一样。<br><a id="more"></a></p>
+</blockquote>
+<h5 id="1-video标签有一个层级问题，永远大于页面其他元素的层级。这样就会导致如果页面有其他内容需要展示在页面上方的时候，比如弹层之类的，这样就会出现以下的情况。"><a href="#1-video标签有一个层级问题，永远大于页面其他元素的层级。这样就会导致如果页面有其他内容需要展示在页面上方的时候，比如弹层之类的，这样就会出现以下的情况。" class="headerlink" title="1. video标签有一个层级问题，永远大于页面其他元素的层级。这样就会导致如果页面有其他内容需要展示在页面上方的时候，比如弹层之类的，这样就会出现以下的情况。"></a>1. video标签有一个层级问题，永远大于页面其他元素的层级。这样就会导致如果页面有其他内容需要展示在页面上方的时候，比如弹层之类的，这样就会出现以下的情况。</h5><p><img src="https://upload-images.jianshu.io/upload_images/10832850-f2a73cfaec9c39fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="视频播放时点开其他的弹层（安卓）"><br>在安卓机型中，如果在视频的播放中的情况点开了其他置于视频上方的元素时，此时视频会挡住点开的元素，不管弹层的层级多高。PS: IOS系统中没有此问题。解决思路大概可如下：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>暂停播放中的视频</span><br><span class="line"><span class="bullet">2. </span>隐藏视频标签</span><br><span class="line"><span class="bullet">3. </span>写一个和视频大小一样的标签占位在原视频标签处，里面可放一张视频的封面图</span><br><span class="line"><span class="bullet">4. </span>显示其他弹出层内容</span><br><span class="line"><span class="bullet">5. </span>关闭弹层时，隐藏占位的封面图，显示视频标签并播放</span><br></pre></td></tr></table></figure></p>
+<h5 id="2-视频在播放的情况下滚动页面，当视频消失在视线中的时候安卓和IOS的视觉效果不一样。IOS中会正常消失，而在安卓系统中会自动置顶在页面顶端。"><a href="#2-视频在播放的情况下滚动页面，当视频消失在视线中的时候安卓和IOS的视觉效果不一样。IOS中会正常消失，而在安卓系统中会自动置顶在页面顶端。" class="headerlink" title="2. 视频在播放的情况下滚动页面，当视频消失在视线中的时候安卓和IOS的视觉效果不一样。IOS中会正常消失，而在安卓系统中会自动置顶在页面顶端。"></a>2. 视频在播放的情况下滚动页面，当视频消失在视线中的时候安卓和IOS的视觉效果不一样。IOS中会正常消失，而在安卓系统中会自动置顶在页面顶端。</h5><p><img src="https://upload-images.jianshu.io/upload_images/10832850-ab95efac52870969.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安卓中视频自动置顶"><br>解决思路：因为此问题是在视频播放的时候才会有这个问题，所有通过获取视频元素距离窗口的高度，当即将离开视线的时候暂停视频。最终还是失败：<br>在安卓中慢速的滑动时是没有问题的，视频暂停，不再置顶，正常的离开视线。但是当很快速的滑动时，还是控制不了它置顶在页面的顶部。下面的代码也考虑用了时间差来判断速度控制暂时，不过还是会先出现置顶，后才会暂停视频。<br>IOS中在自带的浏览器中是没有问题的，但是在<em>支付宝的内置浏览器</em> 中出现了问题，在手指滑动屏幕后，页面自动滚动的过程中，监听不了scroll事件，所以导致高度的计算值一直没有变化，当滚动停止后才更新高度。这样跟预期的想法也差了很远，所以这个方案也被kill。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> touchHight = <span class="number">0</span></span><br><span class="line"><span class="keyword">var</span> dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">$(<span class="string">'.warper'</span>).on(<span class="string">'scroll'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> v =  $(<span class="string">'#video-active'</span>).offset().top - $(<span class="built_in">window</span>).scrollTop();</span><br><span class="line">  <span class="keyword">var</span> touchHightDiff = touchHight - v</span><br><span class="line">  <span class="keyword">var</span> timeDiff = <span class="keyword">new</span> <span class="built_in">Date</span>() - dateTime</span><br><span class="line">      touchHight = v</span><br><span class="line">      dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(timeDiff &lt; <span class="number">25</span> &amp;&amp; touchHightDiff &gt; <span class="number">20</span>)&#123;</span><br><span class="line">    $(<span class="string">'#video-active'</span>).trigger(<span class="string">'pause'</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(v&lt;<span class="number">30</span> )&#123;</span><br><span class="line">    $(<span class="string">'#video-active'</span>).trigger(<span class="string">'pause'</span>)</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(v&gt;<span class="number">30</span>)&#123;</span><br><span class="line">    $(<span class="string">'#video-active'</span>).trigger(<span class="string">'play'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h5 id="3-考虑播放视频的时候全屏展示，退出就暂停视频播放。这样就不会有很大的视觉差别了。"><a href="#3-考虑播放视频的时候全屏展示，退出就暂停视频播放。这样就不会有很大的视觉差别了。" class="headerlink" title="3. 考虑播放视频的时候全屏展示，退出就暂停视频播放。这样就不会有很大的视觉差别了。"></a>3. 考虑播放视频的时候全屏展示，退出就暂停视频播放。这样就不会有很大的视觉差别了。</h5><p>这里引用第三方插件video.js,虽然播放的时候全屏显示，但是又有其他问题了。<br>安卓在退出全屏暂停播放后，再次点击播放的时候不会全屏了，正常播放了。这又和预期的效果不一样了，所以每次播放前视频都是隐藏，用图片代替，点击播放的时候再显示视频并全屏播放，暂停时再次隐藏视频，显示代替图片。这个过程中会有一些问题，安卓在退出全屏后并没有如期隐藏；IOS在暂停后再次播放的时候视频没有了画面。经过多次调试在全屏开始前都增加一个延时定时器会解决相关问题。如下，兼容代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 播放视频 视频播放时开启全屏播放</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">videoPlayer</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 视频初始化</span></span><br><span class="line">    <span class="keyword">var</span> myPlayer = videoJs(<span class="string">'#video'</span>,&#123;</span><br><span class="line">        width:<span class="string">'100%'</span>,</span><br><span class="line">        controls:<span class="literal">false</span>,</span><br><span class="line">        autoplay:<span class="literal">false</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 视频模拟点击开始缓存视频</span></span><br><span class="line">    myPlayer.play();</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        myPlayer.pause();</span><br><span class="line">    &#125;,<span class="number">300</span>)</span><br><span class="line"></span><br><span class="line">     <span class="comment">// 点击替代图片全屏播放视频</span></span><br><span class="line">    $(<span class="string">"#videoPoster .play"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="comment">// 隐藏替代图片 显示视频</span></span><br><span class="line">        $(<span class="string">'#videoPoster'</span>).hide();</span><br><span class="line">        $(<span class="string">'#video'</span>).show()</span><br><span class="line">        <span class="comment">// 全屏播放</span></span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            myPlayer.requestFullscreen();</span><br><span class="line">            myPlayer.play();</span><br><span class="line">        &#125;,<span class="number">300</span>)</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 视频退出全屏会自动暂停触发暂停事件</span></span><br><span class="line">    myPlayer.on(<span class="string">"pause"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 显示替代图片 隐藏视频</span></span><br><span class="line">        $(<span class="string">'#videoPoster'</span>).show()</span><br><span class="line">        $(<span class="string">'#video'</span>).hide()</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>就这样，还是可能会更换其他的方案。</p>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      
+        <i class="iconfont icon-category"></i>       
+        <a class="category-link" href="/categories/技术/">技术</a> <a class="category-link" href="/categories/技术/fontend/">前端</a> 	
+     
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/HTML5/">HTML5</a> <a class="tag-link" href="/tags/WEB前端/">WEB前端</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.jpg">
+      <p class="pf-des">走失在穿暖花开处</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+         
+        
+      </div>  
+    <nav class="pf-paginator">
+           
+        
+      
+        
+        <a href="/2018/05/19/The-road-of-youth/" data-hover="理想三旬 The road of youth"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div>
+<div id="comment"></div> 
+	
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+       <a href="/">
+      <img class="mobile-menu-icon" src="/images/favicon.png">
+       </a>
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">时间轴
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+
+     
+    
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">	    
+
+
+		<div class="footer-copyright">
+		&copy;
+				
+		2017-
+		
+		2018
+
+		Jordon Wang
+			<br>
+			<span id="busuanzi_container_site_pv">
+				<span class="iconfont icon-pv"></span>
+				<span id="busuanzi_value_site_pv"></span>
+			</span> |
+			<span id="busuanzi_container_site_uv">
+				<span class="iconfont icon-uv"></span>
+				<span id="busuanzi_value_site_uv"></span>
+			</span>
+		<br>
+			Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+			Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
