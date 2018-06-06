@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  前端Emoji表情字符串处理 |   Felinae </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css">
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="https://unpkg.com/valine@1.1.9-beta9/dist/Valine.min.js"></script>
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <a class="header-logo" href="/">Felinae</a>  
+
+    <div class="header-menu header-menu-block">
+              
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">时间轴</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <!--<a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>-->
+
+            
+                
+    </div>  
+    <div class="header-menu">
+        <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+    </div>
+  </nav>
+</header>
+<!--<div class="lights">-->
+    <!--<img src="https://gw.alipayobjects.com/os/q/cms/images/jhn0yc59/828a36ab-acd9-4492-a6d3-9edfde153a49_w64_h64.png" alt="">-->
+<!--</div>-->
+<!--<canvas id="stage" class="stage hide" width="507" height="718"></canvas>-->   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		前端emoji表情字符串处理
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		6月 06, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			897
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<p>emoji表情存储需要数据库存储字段的编码方式为utf8mb4，且该编码方式需数据库为 5.5.3 及以上版本。而且发现设置了utf8mb4编码后，还是会有部分emoji表情存储不了，所以改用前端转码后再存入数据库，读取的时候再解码：<br><a id="more"></a><br>转码：<br><figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">utf16toEntities</span><span class="params">(str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> patt=/[\ud800-\udbff][\udc00-\udfff]/g; <span class="comment">// 检测utf16字符正则</span></span><br><span class="line">        str = str.replace(patt, <span class="function"><span class="keyword">function</span><span class="params">(char)</span></span>&#123;</span><br><span class="line">                <span class="keyword">var</span> H, L, code;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">char</span>.length===<span class="number">2</span>) &#123;</span><br><span class="line">                    H = <span class="keyword">char</span>.charCodeAt(<span class="number">0</span>); <span class="comment">// 取出高位</span></span><br><span class="line">                    L = <span class="keyword">char</span>.charCodeAt(<span class="number">1</span>); <span class="comment">// 取出低位</span></span><br><span class="line">                    code = (H - <span class="number">0xD800</span>) * <span class="number">0x400</span> + <span class="number">0x10000</span> + L - <span class="number">0xDC00</span>; <span class="comment">// 转换算法</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="string">"&amp;#"</span> + code + <span class="string">";"</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">char</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>解码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">uncodeUtf16</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> reg = <span class="regexp">/\&amp;#.*?;/g</span>;</span><br><span class="line">        <span class="keyword">var</span> result = str.replace(reg,<span class="function"><span class="keyword">function</span>(<span class="params">char</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> H,L,code;</span><br><span class="line">            <span class="keyword">if</span>(char.length == <span class="number">9</span> )&#123;</span><br><span class="line">                code = <span class="built_in">parseInt</span>(char.match(<span class="regexp">/[0-9]+/g</span>));</span><br><span class="line">                H = <span class="built_in">Math</span>.floor((code<span class="number">-0x10000</span>) / <span class="number">0x400</span>)+<span class="number">0xD800</span>;</span><br><span class="line">                L = (code - <span class="number">0x10000</span>) % <span class="number">0x400</span> + <span class="number">0xDC00</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">unescape</span>(<span class="string">"%u"</span>+H.toString(<span class="number">16</span>)+<span class="string">"%u"</span>+L.toString(<span class="number">16</span>));</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> char;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考：<br><a href="https://blog.csdn.net/binjly/article/details/47321043" target="_blank" rel="noopener">移动前端手机输入法自带emoji表情字符处理</a></p>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      
+        <i class="iconfont icon-category"></i>       
+        <a class="category-link" href="/categories/技术/">技术</a> <a class="category-link" href="/categories/技术/fontend/">前端</a> 	
+     
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/WEB前端/">WEB前端</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.jpg">
+      <p class="pf-des">走失在穿暖花开处</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+         
+        
+      </div>  
+    <nav class="pf-paginator">
+           
+        
+      
+        
+        <a href="/2018/05/26/IntersectionObserver/" data-hover="IntersectionObserver使用"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div>
+<div id="comment"></div> 
+	
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+       <a href="/">
+      <img class="mobile-menu-icon" src="/images/favicon.png">
+       </a>
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">时间轴
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+
+     
+    
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">	    
+
+
+		<div class="footer-copyright">
+		&copy;
+				
+		2017-
+		
+		2018
+
+		Jordon Wang
+			<br>
+			<span id="busuanzi_container_site_pv">
+				<span class="iconfont icon-pv"></span>
+				<span id="busuanzi_value_site_pv"></span>
+			</span> |
+			<span id="busuanzi_container_site_uv">
+				<span class="iconfont icon-uv"></span>
+				<span id="busuanzi_value_site_uv"></span>
+			</span>
+		<br>
+			Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+			Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
