@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   
   
-  <title>  移动端弹出遮罩层后 禁止页面滚动 |   Felinae </title>
+  <title>  使用CSS3制作倒影 Box-Reflect |   Felinae </title>
 
  
   
@@ -76,20 +76,20 @@
 	<div class="post-header">
 
 	<p class="post-title">	
-		移动端弹出遮罩层后 禁止页面滚动
+		使用CSS3制作倒影 box-reflect
 	</p>
 			
 
 	<div class="meta-info">	
 	<span>
-		3月 10, 2018
+		7月 07, 2018
 	</span>
 
 	
 	
 		<i class="iconfont icon-words"></i>
 		<span>
-			424
+			587
 		</span>
 	
 </div>
@@ -102,10 +102,40 @@
 		
 
 			
-					<p>在开发移动web的时候，相信大家都会遇到当有 fixed定位遮罩层弹出时，在屏幕上滑动能够滑动背景下面的内容，这在大部分场景下都不是和友好的，解决方法如下：<br><a id="more"></a></p>
-<h4 id="1-CSS-overflow-hidden"><a href="#1-CSS-overflow-hidden" class="headerlink" title="1.  CSS overflow:hidden"></a>1.  CSS overflow:hidden</h4><p>一般这种情况如果需要阻止滚动嘴简单的方法就是弹层弹出后，给body设置样式 overflow:hidden;在弹层隐藏的同时去掉加上的css, 不过这种并不适用与body的高度刚好是页面的高度，实际下层穿透滚动的元素是在body中的其他元素。 不能完全禁止，还是会有元素可以滚动。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-JS-preventDefault"><a href="#2-JS-preventDefault" class="headerlink" title="2. JS preventDefault"></a>2. JS preventDefault</h4><p>监听touchmove事件并阻止默认事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'mask'</span>).addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">       event.preventDefault();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-  	
+					<p><html></html></p>
+<p></p><p style="-webkit-box-reflect: below 1px -webkit-linear-gradient(transparent,transparent 15%,rgba(0,0,0,.4));font-size: 20px;">CSS3中的box-reflect特性可以实现对图片和文字的倒影效果。</p><br><p></p>
+<p><html><img style="-webkit-box-reflect: below 1px -webkit-linear-gradient(transparent,transparent 30%,rgba(0,0,0,.4));" src="https://gw.alipayobjects.com/os/q/cms/images/jjb2or1y/1e5ea903-12df-4dc8-a823-41cd66f6258c_w500_h277.jpeg"></html><br><a id="more"></a><br><br><br><br><br><br></p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法:"></a>语法:</h4><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-webkit-box-reflect：<span class="keyword">none</span> | <span class="variable">&lt;direction&gt;</span> <span class="variable">&lt;offset&gt;</span>? <span class="variable">&lt;mask-box-image&gt;</span>?</span><br><span class="line"> box-reflect：<span class="keyword">none</span> | <span class="variable">&lt;direction&gt;</span> <span class="variable">&lt;offset&gt;</span>? <span class="variable">&lt;mask-box-image&gt;</span>?</span><br></pre></td></tr></table></figure>
+<h4 id="取值："><a href="#取值：" class="headerlink" title="取值："></a>取值：</h4><p>none：</p>
+<pre><code>无倒影
+</code></pre><p>direction</p>
+<pre><code>above：
+指定倒影在对象的上边
+below：
+指定倒影在对象的下边
+left：
+指定倒影在对象的左边
+right：
+指定倒影在对象的右边
+</code></pre><p>offset</p>
+<pre><code>length：
+用长度值来定义倒影与对象之间的间隔。可以为负值
+percentage：
+用百分比来定义倒影与对象之间的间隔。可以为负值
+</code></pre><p>mask-box-image</p>
+<pre><code>none：
+无遮罩图像
+url：
+使用绝对或相对地址指定遮罩图像。(必须是png格式的图片)
+linear-gradient：
+使用线性渐变创建遮罩图像。
+radial-gradient：
+使用径向(放射性)渐变创建遮罩图像。
+repeating-linear-gradient：
+使用重复的线性渐变创建背遮罩像。
+repeating-radial-gradient：
+使用重复的径向(放射性)渐变创建遮罩图像。
+</code></pre>  	
 					
 	  </div>     
 	  
@@ -114,13 +144,13 @@
 <div class="post-meta">
       
         <i class="iconfont icon-category"></i>       
-        <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/JS/">JS</a> 	
+        <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/CSS/">CSS</a> 	
      
       	
 
       
         <i class="iconfont icon-tag"></i>     
-          <a class="tag-link" href="/tags/HTML5/">HTML5</a> <a class="tag-link" href="/tags/WEB前端/">WEB前端</a>    
+          <a class="tag-link" href="/tags/CSS/">CSS</a> <a class="tag-link" href="/tags/WEB/">WEB</a>    
       	
 </div>
 
@@ -140,14 +170,11 @@
         
       </div>  
     <nav class="pf-paginator">
-      
-         
-          <a href="/2018/04/20/npm-mult-cmds/" data-hover="npm 同时执行多条监听命令">上一篇</a>      
-            
+           
         
       
         
-        <a href="/2017/12/14/ios-web-input/" data-hover="iOS web html5 移动端 软键盘弹起遮挡输入框 输入框定位不准确"> 下一篇</a>
+        <a href="/2018/06/06/emoji-string/" data-hover="前端emoji表情字符串处理"> 下一篇</a>
             
   </nav>   
   </div>

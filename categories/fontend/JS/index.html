@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   
   
-  <title>  移动端弹出遮罩层后 禁止页面滚动 |   Felinae </title>
+  <title>  分类: JS |   Felinae </title>
 
  
   
@@ -68,95 +68,67 @@
       <div class="container">       
           
           
-            <section class="main">  
+            <section class="main slideDownMin">
           
 
-          <article class="post">
+          <section>
+
   
-	<div class="post-header">
 
-	<p class="post-title">	
-		移动端弹出遮罩层后 禁止页面滚动
-	</p>
-			
+  	<span class="page-title"># JS</span>
 
-	<div class="meta-info">	
-	<span>
-		3月 10, 2018
-	</span>
+  	   
 
-	
-	
-		<i class="iconfont icon-words"></i>
-		<span>
-			424
-		</span>
-	
-</div>
+        	
 
-</div> 
-	 
+	   
 
-	  <div class="post-content slideDownMin">
+	   <article class="item slideDownMin">   	
 
-		
+        <time class="item-date"> 2018-06-06</time>    
 
-			
-					<p>在开发移动web的时候，相信大家都会遇到当有 fixed定位遮罩层弹出时，在屏幕上滑动能够滑动背景下面的内容，这在大部分场景下都不是和友好的，解决方法如下：<br><a id="more"></a></p>
-<h4 id="1-CSS-overflow-hidden"><a href="#1-CSS-overflow-hidden" class="headerlink" title="1.  CSS overflow:hidden"></a>1.  CSS overflow:hidden</h4><p>一般这种情况如果需要阻止滚动嘴简单的方法就是弹层弹出后，给body设置样式 overflow:hidden;在弹层隐藏的同时去掉加上的css, 不过这种并不适用与body的高度刚好是页面的高度，实际下层穿透滚动的元素是在body中的其他元素。 不能完全禁止，还是会有元素可以滚动。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">  <span class="attribute">overflow</span>:hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-JS-preventDefault"><a href="#2-JS-preventDefault" class="headerlink" title="2. JS preventDefault"></a>2. JS preventDefault</h4><p>监听touchmove事件并阻止默认事件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'mask'</span>).addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">       event.preventDefault();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-  	
-					
-	  </div>     
-	  
+        <a class="item-title" href="/2018/06/06/emoji-string/">前端emoji表情字符串处理</a>
 
-	
-<div class="post-meta">
-      
-        <i class="iconfont icon-category"></i>       
-        <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/JS/">JS</a> 	
-     
-      	
+      </article>
 
-      
-        <i class="iconfont icon-tag"></i>     
-          <a class="tag-link" href="/tags/HTML5/">HTML5</a> <a class="tag-link" href="/tags/WEB前端/">WEB前端</a>    
-      	
-</div>
+       
 
+  	   
 
+        	
 
+	   
 
+	   <article class="item slideDownMin">   	
 
-<div class="post-footer">
-  <div class="pf-left">
-      <img class="pf-avatar" src="/images/header.jpg">
-      <p class="pf-des">走失在穿暖花开处</p>
-  </div>
+        <time class="item-date"> 2018-05-26</time>    
 
-  <div class="pf-right">           
-      <div class="pf-links">
-         
-        
-      </div>  
-    <nav class="pf-paginator">
-      
-         
-          <a href="/2018/04/20/npm-mult-cmds/" data-hover="npm 同时执行多条监听命令">上一篇</a>      
-            
-        
-      
-        
-        <a href="/2017/12/14/ios-web-input/" data-hover="iOS web html5 移动端 软键盘弹起遮挡输入框 输入框定位不准确"> 下一篇</a>
-            
-  </nav>   
-  </div>
-</div>
-<div id="comment"></div> 
-	
-	
-</article>
+        <a class="item-title" href="/2018/05/26/IntersectionObserver/">IntersectionObserver使用</a>
 
+      </article>
+
+       
+
+  	   
+
+        	
+
+	   
+
+	   <article class="item slideDownMin">   	
+
+        <time class="item-date"> 2018-03-10</time>    
+
+        <a class="item-title" href="/2018/03/10/forbid-scrolling/">移动端弹出遮罩层后 禁止页面滚动</a>
+
+      </article>
+
+       
+
+  	 
+    
+
+</section>
           </section> 
       </div>            
     

@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[使用CSS3制作倒影 box-reflect]]></title>
+    <url>%2F2018%2F07%2F07%2Fcss-box-reflect%2F</url>
+    <content type="text"><![CDATA[CSS3中的box-reflect特性可以实现对图片和文字的倒影效果。 语法:12-webkit-box-reflect：none | &lt;direction&gt; &lt;offset&gt;? &lt;mask-box-image&gt;? box-reflect：none | &lt;direction&gt; &lt;offset&gt;? &lt;mask-box-image&gt;? 取值：none： 无倒影 direction above： 指定倒影在对象的上边 below： 指定倒影在对象的下边 left： 指定倒影在对象的左边 right： 指定倒影在对象的右边 offset length： 用长度值来定义倒影与对象之间的间隔。可以为负值 percentage： 用百分比来定义倒影与对象之间的间隔。可以为负值 mask-box-image none： 无遮罩图像 url： 使用绝对或相对地址指定遮罩图像。(必须是png格式的图片) linear-gradient： 使用线性渐变创建遮罩图像。 radial-gradient： 使用径向(放射性)渐变创建遮罩图像。 repeating-linear-gradient： 使用重复的线性渐变创建背遮罩像。 repeating-radial-gradient： 使用重复的径向(放射性)渐变创建遮罩图像。]]></content>
+      <categories>
+        <category>前端</category>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[前端emoji表情字符串处理]]></title>
     <url>%2F2018%2F06%2F06%2Femoji-string%2F</url>
     <content type="text"><![CDATA[emoji表情存储需要数据库存储字段的编码方式为utf8mb4，且该编码方式需数据库为 5.5.3 及以上版本。而且发现设置了utf8mb4编码后，还是会有部分emoji表情存储不了，所以改用前端转码后再存入数据库，读取的时候再解码：转码：123456789101112131415function utf16toEntities(str) &#123; var patt=/[\ud800-\udbff][\udc00-\udfff]/g; // 检测utf16字符正则 str = str.replace(patt, function(char)&#123; var H, L, code; if (char.length===2) &#123; H = char.charCodeAt(0); // 取出高位 L = char.charCodeAt(1); // 取出低位 code = (H - 0xD800) * 0x400 + 0x10000 + L - 0xDC00; // 转换算法 return "&amp;#" + code + ";"; &#125; else &#123; return char; &#125; &#125;); return str; &#125; 解码：123456789101112131415function uncodeUtf16(str)&#123; var reg = /\&amp;#.*?;/g; var result = str.replace(reg,function(char)&#123; var H,L,code; if(char.length == 9 )&#123; code = parseInt(char.match(/[0-9]+/g)); H = Math.floor((code-0x10000) / 0x400)+0xD800; L = (code - 0x10000) % 0x400 + 0xDC00; return unescape("%u"+H.toString(16)+"%u"+L.toString(16)); &#125;else&#123; return char; &#125; &#125;); return result; &#125; 参考：移动前端手机输入法自带emoji表情字符处理]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
+        <category>JS</category>
       </categories>
       <tags>
-        <tag>WEB前端</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -17,11 +30,11 @@
     <url>%2F2018%2F05%2F26%2FIntersectionObserver%2F</url>
     <content type="text"><![CDATA[IntersectionObserver用来监听一个目标元素是否出现在web页面的可视区域。传统方式监听一个元素是否出现在可视区，可以监听scroll事件，计算目标元素距离顶部的距离减去页面滑出的距离；如果大于0且小于窗口的高度则表明是可见的。10 &lt; $("targetDom").offset().top - $(document).scrollTop() &lt; $(window).height() 但是此方法需监听scroll事件，对性能要求高。 IntersectionObserver API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）12345678910111. 创建一个观察实例var io = new IntersectionObserver(callback, option);// 开始观察io.observe(document.getElementById('example'));// 停止观察io.unobserve(element);// 关闭观察器io.disconnect(); callbackcallback会在元素刚开始进入视线和完全离开视线触发：12345var io = new IntersectionObserver( entries =&gt; &#123; console.log(entries); &#125;) 回调函数返回IntersectionObserverEntry的对象有以下属性：12345678910111213141516171819&#123; time: 3893.92, rootBounds: ClientRect &#123; bottom: 920, height: 1024, left: 0, right: 1024, top: 0, width: 920 &#125;, boundingClientRect: ClientRect &#123; // ... &#125;, intersectionRect: ClientRect &#123; // ... &#125;, intersectionRatio: 0.54, target: element&#125; 123456time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒target：被观察的目标元素，是一个 DOM 节点对象rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回nullboundingClientRect：目标元素的矩形区域的信息intersectionRect：目标元素与视口（或根元素）的交叉区域的信息intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0 使用12345new IntersectionObserver(function(entries) &#123; if (!(entries[0].intersectionRatio &lt;= 0)) &#123; loadData() &#125;&#125;).observe(document.querySelector("targetDOM")), Option 参数1 threshold 属性threshold属性决定了什么时候触发回调函数。对应的值是一个数组，默认是[0]123456new IntersectionObserver( entries =&gt; &#123;/* ... */&#125;, &#123; threshold: [0, 0.25, 0.5, 0.75, 1] //当目标元素 0%、25%、50%、75%、100% 可见时，会触发回调函数。 &#125;); 2 root 属性，rootMargin 属性很多时候，目标元素不仅会随着窗口滚动，还会在容器里面滚动（比如在iframe窗口里滚动）。123456789var opts = &#123; root: document.querySelector('.container'), rootMargin: "500px 0px"&#125;;var observer = new IntersectionObserver( callback, opts); 上面代码中，除了root属性，还有rootMargin属性。后者定义根元素的margin，用来扩展或缩小rootBounds这个矩形的大小，从而影响intersectionRect交叉区域的大小。它使用CSS的定义方法，比如10px 20px 30px 40px，表示 top、right、bottom 和 left 四个方向的值。这样设置以后，不管是窗口滚动或者容器内滚动，只要目标元素可见性变化，都会触发观察器。 IntersectionObserver API 是异步触发只有线程空闲下来，才会执行观察器。这意味着，这个观察器的优先级非常低，只在其他任务执行完，浏览器有了空闲才会执行。 参考IntersectionObserver API 使用教程]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
+        <category>JS</category>
       </categories>
       <tags>
-        <tag>WEB前端</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -29,12 +42,12 @@
     <url>%2F2018%2F05%2F25%2Fhtml5-video-compatible%2F</url>
     <content type="text"><![CDATA[最近因为项目中用到了视频播放，所以使用了HTML5中的video标签，但是遇到了的各种兼容问题。背景：项目运行在支付宝内的网页，被第三方测试机构测出安卓和IOS中视觉不一样。 1. video标签有一个层级问题，永远大于页面其他元素的层级。这样就会导致如果页面有其他内容需要展示在页面上方的时候，比如弹层之类的，这样就会出现以下的情况。在安卓机型中，如果在视频的播放中的情况点开了其他置于视频上方的元素时，此时视频会挡住点开的元素，不管弹层的层级多高。PS: IOS系统中没有此问题。解决思路大概可如下：123451. 暂停播放中的视频2. 隐藏视频标签3. 写一个和视频大小一样的标签占位在原视频标签处，里面可放一张视频的封面图4. 显示其他弹出层内容5. 关闭弹层时，隐藏占位的封面图，显示视频标签并播放 2. 视频在播放的情况下滚动页面，当视频消失在视线中的时候安卓和IOS的视觉效果不一样。IOS中会正常消失，而在安卓系统中会自动置顶在页面顶端。解决思路：因为此问题是在视频播放的时候才会有这个问题，所有通过获取视频元素距离窗口的高度，当即将离开视线的时候暂停视频。最终还是失败：在安卓中慢速的滑动时是没有问题的，视频暂停，不再置顶，正常的离开视线。但是当很快速的滑动时，还是控制不了它置顶在页面的顶部。下面的代码也考虑用了时间差来判断速度控制暂时，不过还是会先出现置顶，后才会暂停视频。IOS中在自带的浏览器中是没有问题的，但是在支付宝的内置浏览器 中出现了问题，在手指滑动屏幕后，页面自动滚动的过程中，监听不了scroll事件，所以导致高度的计算值一直没有变化，当滚动停止后才更新高度。这样跟预期的想法也差了很远，所以这个方案也被kill。12345678910111213141516171819var touchHight = 0var dateTime = new Date()$('.warper').on('scroll',function()&#123; var v = $('#video-active').offset().top - $(window).scrollTop(); var touchHightDiff = touchHight - v var timeDiff = new Date() - dateTime touchHight = v dateTime = new Date() if(timeDiff &lt; 25 &amp;&amp; touchHightDiff &gt; 20)&#123; $('#video-active').trigger('pause') return &#125; if(v&lt;30 )&#123; $('#video-active').trigger('pause') &#125;else if(v&gt;30)&#123; $('#video-active').trigger('play'); &#125;&#125;) 3. 考虑播放视频的时候全屏展示，退出就暂停视频播放。这样就不会有很大的视觉差别了。这里引用第三方插件video.js,虽然播放的时候全屏显示，但是又有其他问题了。安卓在退出全屏暂停播放后，再次点击播放的时候不会全屏了，正常播放了。这又和预期的效果不一样了，所以每次播放前视频都是隐藏，用图片代替，点击播放的时候再显示视频并全屏播放，暂停时再次隐藏视频，显示代替图片。这个过程中会有一些问题，安卓在退出全屏后并没有如期隐藏；IOS在暂停后再次播放的时候视频没有了画面。经过多次调试在全屏开始前都增加一个延时定时器会解决相关问题。如下，兼容代码：1234567891011121314151617181920212223242526272829303132// 播放视频 视频播放时开启全屏播放function videoPlayer()&#123; // 视频初始化 var myPlayer = videoJs('#video',&#123; width:'100%', controls:false, autoplay:false &#125;); // 视频模拟点击开始缓存视频 myPlayer.play(); setTimeout(function()&#123; myPlayer.pause(); &#125;,300) // 点击替代图片全屏播放视频 $("#videoPoster .play").click(function() &#123; // 隐藏替代图片 显示视频 $('#videoPoster').hide(); $('#video').show() // 全屏播放 setTimeout(function()&#123; myPlayer.requestFullscreen(); myPlayer.play(); &#125;,300) &#125;); // 视频退出全屏会自动暂停触发暂停事件 myPlayer.on("pause", function()&#123; // 显示替代图片 隐藏视频 $('#videoPoster').show() $('#video').hide() &#125;);&#125; 就这样，还是可能会更换其他的方案。]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>WEB前端</tag>
-        <tag>HTML5</tag>
+        <tag>WEB</tag>
+        <tag>移动端</tag>
+        <tag>兼容</tag>
       </tags>
   </entry>
   <entry>
@@ -53,8 +66,8 @@
     <url>%2F2018%2F05%2F13%2FHexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%A7%A3%E7%AD%94%2F</url>
     <content type="text"><![CDATA[Q: 如何使用github的根目录访问Hexo搭建的博客网站? A: 建立与你用户名对应的仓库，仓库名如下： 1your_user_name.github.io Hexo 根配置文件如下： 12url: https://your_user_name.github.io/root: / 此时即可通过https://your_user_name.github.io访问，不用携带子路径。 Q: Hexo categories，tags，about页面不显示解决办法?A: 默认初始化的时候是没有categories和tags等页面的，如果需要，执行如下命令新增相关页面： 12345hexo new page "tags"hexo new page "categories"hexo new page "about" 编辑 /tags/index.md /categories/index.md /about/index.md 1234567891011// tagstype: tagslayout: tags// categoriestype: categorieslayout: categories// abouttitle: aboutlayout: about 有一点要注意的是，上面layout对应的值要与实际你用的主题中的layout的名称要对上，不然会造成页面加载不出来 123// categories 我的主题categories页实际的layout名是category.ejstitle: categorieslayout: category Q: Hexo categories，tags有中文的情况下会导致url访问路径也会带上中文，怎么设置别名?比如分类我们设置的是： 1categories: 前端 那么在生成页面后，分类列表就会出现前端这个选项，它的访问路径是： 1/categories/前端 A: 打开根目录下的配置文件 _config.yml ，找到如下位置做更改： 123456default_category: uncategorizedcategory_map: 前端: fontendtag_map: 测试: test 此时的访问路径将是： 12/categories/fontend//tags/test/ Q: Hexo主题中如何实现多级分类？A: 在主题文件夹中找到 layout/category.ejs 文件，修改成如下所示：123456&lt;% if (site.categories.length)&#123; %&gt;&lt;div class="widget tag"&gt; &lt;h3 class="title"&gt;&lt;%= __('categories') %&gt;&lt;/h3&gt; &lt;%- list_categories(site.categories) %&gt;&lt;/div&gt;&lt;% &#125; %&gt; 如果不显示多级分类了，只需设置list_categories函数的参数即可list_categories(site.categories,{depth: 1}) 这样就只会显示一级分类了。]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
+        <category>其他</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
@@ -65,7 +78,6 @@
     <url>%2F2018%2F04%2F20%2Fnpm-mult-cmds%2F</url>
     <content type="text"><![CDATA[在全栈开发中，难免会遇到同时需启动多个服务，按照常规的方式需要开启多个窗口，这样难免有些麻烦。下面介绍一种只需要一条npm执行多条命令，即可开启多个服务： 1.安装 concurrently:1npm install -g concurrently 2.更改package.json的 scripts: 方便同时启动多个服务，此时后端的代码是在前端代码中的一个目录，这样方便操作。12345"scripts": &#123; "client": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js", "server" : "node node/bin/www", "start": "concurrent \"npm run client\" \"npm run server\"" &#125; 3.启动:1npm run start]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
       </categories>
       <tags>
@@ -77,8 +89,8 @@
     <url>%2F2018%2F03%2F10%2Fforbid-scrolling%2F</url>
     <content type="text"><![CDATA[在开发移动web的时候，相信大家都会遇到当有 fixed定位遮罩层弹出时，在屏幕上滑动能够滑动背景下面的内容，这在大部分场景下都不是和友好的，解决方法如下： 1. CSS overflow:hidden一般这种情况如果需要阻止滚动嘴简单的方法就是弹层弹出后，给body设置样式 overflow:hidden;在弹层隐藏的同时去掉加上的css, 不过这种并不适用与body的高度刚好是页面的高度，实际下层穿透滚动的元素是在body中的其他元素。 不能完全禁止，还是会有元素可以滚动。123body&#123; overflow:hidden&#125; 2. JS preventDefault监听touchmove事件并阻止默认事件123document.getElementById('mask').addEventListener('touchmove', function (event) &#123; event.preventDefault();&#125;)]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
+        <category>JS</category>
       </categories>
       <tags>
         <tag>WEB前端</tag>
@@ -90,11 +102,12 @@
     <url>%2F2017%2F12%2F14%2Fios-web-input%2F</url>
     <content type="text"><![CDATA[移动web当有输入框fixed定位在底部的时候，点击输入，弹起软键盘，iOS在将页面推上的时候会回弹一下，导致键盘刚好遮挡到输入框。而且在页面不同高度弹起的键盘对输入框的位置还不一样。（所受影响的元素此时是fixed定位）。 1. 当换起键盘的时候把输入框的fixed定位改为relative定位到页面的底部，当输入完成离开输入框的时候，再把输入框的定位改为fixed。这样不会引起输入框的位置不可控。处理较为简单。 代码如下：12345678910111213if(isiOS)&#123; $(document).on("focusin",function()&#123; // $('.postMsgBg') 输入框 $('.postMsgBg').css('position','relative') var clientHeight= document.body.clientHeight; setTimeout(function()&#123; $(window).scrollTop(clientHeight); &#125;,300); &#125;); $(document).on('focusout', function () &#123; $('.postMsgBg').css('position','fixed') &#125;);&#125;; 以上的方法是可以解决弹起键盘后输入框乱跳的问题，但是每次都会跳到屏幕的最下方，这样会比较突兀，相对体验不是很友好。 2. 在body下面新建一个具有absolute属性的元素，将页面所有的模块放在此元素中。在此元素的同级新建一个定位为fixed的元素（输入框）。这样每次弹起也不会造成输入框乱跳，并且每次弹起的位置是在点击的位置。123456789101112131415161718192021222324&lt;body&gt; &lt;div class='warper'&gt; &lt;div class='content'&gt;&lt;/div&gt; &lt;div&gt; &lt;div class="fix-bottom"&gt;&lt;/div&gt;&lt;/body&gt;&lt;style&gt; .warper&#123; position: absolute; width: 100%; left: 0; right: 0; top: 0; bottom: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch;/* 解决ios滑动不流畅问题 */ &#125; .fix-bottom&#123; position:fixed; bottom:0; width: 100%; &#125;&lt;/style&gt;]]></content>
       <categories>
-        <category>技术</category>
         <category>前端</category>
       </categories>
       <tags>
-        <tag>WEB前端</tag>
+        <tag>WEB</tag>
+        <tag>移动端</tag>
+        <tag>兼容</tag>
         <tag>HTML5</tag>
       </tags>
   </entry>
