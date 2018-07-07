@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Vue 开发中遇到的问题及解决]]></title>
+    <url>%2F2018%2F07%2F07%2Fvue-special-remarks%2F</url>
+    <content type="text"><![CDATA[以下记录在开发Vue项目中遇到的相关问题及解决办法，不定期更新。 在微信中使用Vue项目如涉及微信支付，路由模式应使用哈希模式，且在支付页面需特殊处理，不然会有支付权限的问题。12345var pos = location.href.indexOf('#')var my_url = location.href.split('#')if (location.href[pos - 1] !== '?') &#123; location.href = my_url[0] + '?#' +my_url[1]&#125; 页面中报错[Vue warn]: Invalid value for option “components”: expected an Object, but got Array.在开发过程中发现这个错误，很明显是提升配置组件时对应的值应该是一个对象不是数组，但是找遍了自己所有的页面和组件中都没有写错，此时该联想到是不是第三方的库版本太老旧引起的。我最终发现我出现这个报错的原因是引用了太旧版本的bootstarp-vue引起的。升级到新一点的版本久没有问题了。 页面中报错Injection “elFormItem” not found这个错误是ElementUI引起的，原因是ElementUI过高或是Vue过低引起，都升级到最新版即可。 Vue_cli npm run dev时报错No parser and no filepath given, using ‘babylon’ the parser now but this will throw an error in the future. Please specify a parser or a filepath so one can be inferred.是prettier模块导致的报错，查了下发现In prettier 1.13.0, default parser was removed with a minor version(used to be babylon), this breaks the formatter here.意思是在prettier的 1.13.0版本，默认的一个解析器被移除了导致项目创建失败解决办法把node_modules里的prettier删掉，重现下个之前的版本 npm install prettier@~1.12.0再运行就可以了参考 chrome devtools 工具vue不可使用,提示Vue.js is detected on this page. Devtools inspection is not available because it&#39;s in production mode or explicitly disabled by the author应该引用开发版本的vue.js而不是压缩版本vue.min.js。 使用vue-cli的项目开发环境通过loaclhost可以访问，但不能通过ip访问（在app内嵌入web网页在开发环境指向自己的本机电脑启动的服务，通过IP不能访问，提示访问被拒绝）修改config/index.js host: ‘localhost’ 改为 host: ‘0.0.0.0’, 开发环境调用后台接口跨域修改config/index.js;将所有的接口都加上一个特殊的字段（我这里的用的api匹配），在代理这层匹配成功后会代理到目标地址。123456789proxyTable: &#123; '/api': &#123; target: 'http://example.com', changeOrigin: true, pathRewrite:&#123; '/api':'' &#125; &#125;,&#125;]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vue_cli中webpack相关优化]]></title>
+    <url>%2F2018%2F07%2F07%2Fvue-cli-optimization%2F</url>
+    <content type="text"><![CDATA[在webpack管理的项目中如果不优化的情况下，webpack打包出来的文件很是庞大，会导致项目在首屏加载的时间过长，体验很不好。以下优化手段不定期更新。 导致打包文件庞大的原因可以通过配置package.json命令 &quot;analyz&quot;: &quot;NODE_ENV=production npm_config_report=true npm run build&quot;,运行npm run analyz，即可在很直观的看到造成包庞大的原因。 路由组件懒加载把不同路由对应的组件分割成不同的代码块，当路由被访问的时候才加载对应的组件，实现路由组件的懒加载。12345678910const Full = r =&gt; require.ensure([], () =&gt; r(require('@/views/Full')), 'Full')// 路由切换时增加loadingconst Full = resolve =&gt; &#123; Loading.open() require.ensure([], () =&gt; &#123; resolve(require('@/views/Full')) Loading.close() &#125;)&#125; CDN引入资源1 在根目录下的index.html头部引入相关CDN地址。123456&lt;link rel="stylesheet" href="//cdn.bootcss.com/element-ui/2.0.8/theme-chalk/index.css"&gt;&lt;script src="//cdn.bootcss.com/vue/2.5.3/vue.min.js"&gt;&lt;/script&gt;&lt;script src="//cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"&gt;&lt;/script&gt;&lt;script src="//cdn.bootcss.com/vuex/3.0.1/vuex.min.js"&gt;&lt;/script&gt;&lt;script src="//cdn.bootcss.com/axios/0.17.1/axios.min.js"&gt;&lt;/script&gt;&lt;script src="//cdn.bootcss.com/element-ui/2.0.8/index.js"&gt;&lt;/script&gt; 2 更改webpack.config.js配置externals如下；本身代码中引入的模块不需要删除，配置过externals后更改webpack会过滤掉。 externals: 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)。1234567891011module.exports = &#123; entry: &#123; app: './src/main.js' &#125;, externals:&#123; 'vue': 'Vue', 'vue-router': 'VueRouter' ... &#125; ...&#125; 引入该引入的包使用Vue的项目更多操作的数据，而不是节点，所以就不必要引入JQuery这类的库及插件。UI框架尽量统一用一个即可，如只是使用到了改UI框架的部分组件，就不要全局引入，应按需引入。 生产环境，去除源码生产环境不生成sourceMap，sourceMap是用来debug编译后的文件，也就是在服务器上是可以看到源代码的，如果调试及测试都没问题，最后发布生产的时候可省去sourceMap文件。 12345vue-cli脚手架config目录下index.js配置文件productionSourceMap设置为falsebuild：&#123; ... productionSourceMap：false&#125; 开启gzip压缩vue-cli脚手架config目录下index.js配置文件productionGzip设置为true1234build：&#123; ... productionGzip：true&#125; build/webpack.prod.conf.js 有gzip的详细配置1234567891011121314151617if (config.build.productionGzip) &#123; var CompressionWebpackPlugin = require('compression-webpack-plugin') webpackConfig.plugins.push( new CompressionWebpackPlugin(&#123; asset: '[path].gz[query]', algorithm: 'gzip', test: new RegExp( '\\.(' + config.build.productionGzipExtensions.join('|') + ')$' ), threshold: 10240, minRatio: 0.8 &#125;) )&#125; CSS 默认压缩文件是可以使用，js需额外配置ngnix才可使用，正确的Response Headers有Content-Enconding: gzip 即配置OK的。1234conf目录下的nginx.confgzip on;gzip_types text/plain application/x-javascript application/javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;]]></content>
+      <categories>
+        <category>前端</category>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>webpack</tag>
+        <tag>优化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用CSS3制作倒影 box-reflect]]></title>
     <url>%2F2018%2F07%2F07%2Fcss-box-reflect%2F</url>
     <content type="text"><![CDATA[CSS3中的box-reflect特性可以实现对图片和文字的倒影效果。 语法:12-webkit-box-reflect：none | &lt;direction&gt; &lt;offset&gt;? &lt;mask-box-image&gt;? box-reflect：none | &lt;direction&gt; &lt;offset&gt;? &lt;mask-box-image&gt;? 取值：none： 无倒影 direction above： 指定倒影在对象的上边 below： 指定倒影在对象的下边 left： 指定倒影在对象的左边 right： 指定倒影在对象的右边 offset length： 用长度值来定义倒影与对象之间的间隔。可以为负值 percentage： 用百分比来定义倒影与对象之间的间隔。可以为负值 mask-box-image none： 无遮罩图像 url： 使用绝对或相对地址指定遮罩图像。(必须是png格式的图片) linear-gradient： 使用线性渐变创建遮罩图像。 radial-gradient： 使用径向(放射性)渐变创建遮罩图像。 repeating-linear-gradient： 使用重复的线性渐变创建背遮罩像。 repeating-radial-gradient： 使用重复的径向(放射性)渐变创建遮罩图像。]]></content>
@@ -93,7 +118,7 @@
         <category>JS</category>
       </categories>
       <tags>
-        <tag>WEB前端</tag>
+        <tag>WEB</tag>
         <tag>HTML5</tag>
       </tags>
   </entry>

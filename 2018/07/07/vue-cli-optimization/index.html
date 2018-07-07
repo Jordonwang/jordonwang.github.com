@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta name="keywords" content="javascript,node,jquery,git,编程,开发,网络,互联网,web,web前端,前端,h5,html5,css3,css,html,js">
+  <meta name="description" content="前端开发者，个人博客">
+    
+  
+  <title>  Vue_cli中webpack相关优化 |   Felinae </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css">
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine@1.1.9-beta9/dist/Valine.min.js"></script>
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+   
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <a class="header-logo" href="/">
+        <i>F</i><i>e</i><i>l</i><i>i</i><i>n</i><i>a</i><i>e</i>
+    </a>
+    <div class="header-menu header-menu-block">
+              
+            
+
+              <a class="header-menu-link" id="header-menu-archives" href="/archives">时间轴</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+
+            
+            
+            
+
+              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
+
+            
+            
+            
+
+              <!--<a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>-->
+
+            
+                
+    </div>  
+    <div class="header-menu">
+        <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+    </div>
+  </nav>
+</header>
+<!--<div class="lights">-->
+    <!--<img src="https://gw.alipayobjects.com/os/q/cms/images/jhn0yc59/828a36ab-acd9-4492-a6d3-9edfde153a49_w64_h64.png" alt="">-->
+<!--</div>-->
+<!--<canvas id="stage" class="stage hide" width="507" height="718"></canvas>-->   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		Vue_cli中webpack相关优化
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		7月 07, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			2429
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="post-content slideDownMin">
+
+		
+
+			
+					<p>在webpack管理的项目中如果不优化的情况下，webpack打包出来的文件很是庞大，会导致项目在首屏加载的时间过长，体验很不好。以下优化手段不定期更新。<br><a id="more"></a></p>
+<h4 id="导致打包文件庞大的原因"><a href="#导致打包文件庞大的原因" class="headerlink" title="导致打包文件庞大的原因"></a>导致打包文件庞大的原因</h4><p>可以通过配置package.json命令 <code>&quot;analyz&quot;: &quot;NODE_ENV=production npm_config_report=true npm run build&quot;</code>,运行<code>npm run analyz</code>，即可在很直观的看到造成包庞大的原因。<br><img src="https://upload-images.jianshu.io/upload_images/10832850-cf2d3cdbd6cd4c32.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信截图_20180623182928.png"></p>
+<h4 id="路由组件懒加载"><a href="#路由组件懒加载" class="headerlink" title="路由组件懒加载"></a>路由组件懒加载</h4><p>把不同路由对应的组件分割成不同的代码块，当路由被访问的时候才加载对应的组件，实现路由组件的懒加载。<br><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Full = <span class="function"><span class="params">r</span> =&gt;</span> <span class="built_in">require</span>.ensure([], <span class="function"><span class="params">()</span> =&gt;</span> r(<span class="built_in">require</span>(<span class="string">'@/views/Full'</span>)), <span class="string">'Full'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 路由切换时增加loading</span></span><br><span class="line"><span class="keyword">const</span> Full = <span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    Loading.open()</span><br><span class="line">    <span class="built_in">require</span>.ensure([], <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="built_in">require</span>(<span class="string">'@/views/Full'</span>))</span><br><span class="line">    Loading.close()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="CDN引入资源"><a href="#CDN引入资源" class="headerlink" title="CDN引入资源"></a>CDN引入资源</h4><h5 id="1-在根目录下的index-html头部引入相关CDN地址。"><a href="#1-在根目录下的index-html头部引入相关CDN地址。" class="headerlink" title="1 在根目录下的index.html头部引入相关CDN地址。"></a>1 在根目录下的index.html头部引入相关CDN地址。</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//cdn.bootcss.com/element-ui/2.0.8/theme-chalk/index.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/vue/2.5.3/vue.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/vue-router/3.0.1/vue-router.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/vuex/3.0.1/vuex.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/axios/0.17.1/axios.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//cdn.bootcss.com/element-ui/2.0.8/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-更改webpack-config-js配置externals如下；本身代码中引入的模块不需要删除，配置过externals后更改webpack会过滤掉。"><a href="#2-更改webpack-config-js配置externals如下；本身代码中引入的模块不需要删除，配置过externals后更改webpack会过滤掉。" class="headerlink" title="2 更改webpack.config.js配置externals如下；本身代码中引入的模块不需要删除，配置过externals后更改webpack会过滤掉。"></a>2 更改webpack.config.js配置externals如下；本身代码中引入的模块不需要删除，配置过externals后更改webpack会过滤掉。</h5><blockquote>
+<p><strong>externals</strong>: 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖(external dependencies)。<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span>.exports = &#123;</span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="string">'./src/main.js'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  externals:&#123;</span><br><span class="line">    <span class="string">'vue'</span>: <span class="string">'Vue'</span>,</span><br><span class="line">    <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span></span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="引入该引入的包"><a href="#引入该引入的包" class="headerlink" title="引入该引入的包"></a>引入该引入的包</h4><p>使用Vue的项目更多操作的数据，而不是节点，所以就不必要引入JQuery这类的库及插件。UI框架尽量统一用一个即可，如只是使用到了改UI框架的部分组件，就不要全局引入，应按需引入。</p>
+<h4 id="生产环境，去除源码"><a href="#生产环境，去除源码" class="headerlink" title="生产环境，去除源码"></a>生产环境，去除源码</h4><p>生产环境不生成sourceMap，sourceMap是用来debug编译后的文件，也就是在服务器上是可以看到源代码的，如果调试及测试都没问题，最后发布生产的时候可省去sourceMap文件。</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vue-cli脚手架config目录下<span class="keyword">index</span>.js配置文件productionSourceMap设置为<span class="literal">false</span></span><br><span class="line"><span class="keyword">build</span>：&#123;</span><br><span class="line">    ...</span><br><span class="line">    productionSourceMap：<span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="开启gzip压缩"><a href="#开启gzip压缩" class="headerlink" title="开启gzip压缩"></a>开启gzip压缩</h4><p>vue-cli脚手架config目录下index.js配置文件productionGzip设置为true<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">build：&#123;</span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    productionGzip：<span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>build/webpack.prod.conf.js 有gzip的详细配置<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (config<span class="selector-class">.build</span><span class="selector-class">.productionGzip</span>) &#123;</span><br><span class="line">  <span class="selector-tag">var</span> CompressionWebpackPlugin = require(<span class="string">'compression-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line">  webpackConfig<span class="selector-class">.plugins</span><span class="selector-class">.push</span>(</span><br><span class="line">    new CompressionWebpackPlugin(&#123;</span><br><span class="line">      asset: <span class="string">'[path].gz[query]'</span>,</span><br><span class="line">      algorithm: <span class="string">'gzip'</span>,</span><br><span class="line">      test: new RegExp(</span><br><span class="line">        <span class="string">'\\.('</span> +</span><br><span class="line">        config<span class="selector-class">.build</span><span class="selector-class">.productionGzipExtensions</span><span class="selector-class">.join</span>(<span class="string">'|'</span>) +</span><br><span class="line">        <span class="string">')$'</span></span><br><span class="line">      ),</span><br><span class="line">      threshold: <span class="number">10240</span>,</span><br><span class="line">      minRatio: <span class="number">0.8</span></span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>CSS 默认压缩文件是可以使用，js需额外配置ngnix才可使用，正确的Response Headers有Content-Enconding: gzip 即配置OK的。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conf目录下的nginx.conf</span><br><span class="line"></span><br><span class="line">gzip  <span class="keyword">on</span>;</span><br><span class="line">gzip_types <span class="built_in">text</span>/plain <span class="built_in">application</span>/x-javascript <span class="built_in">application</span>/javascript <span class="built_in">text</span>/css <span class="built_in">application</span>/xml <span class="built_in">text</span>/javascript <span class="built_in">application</span>/x-httpd-php image/jpeg image/gif image/png;</span><br></pre></td></tr></table></figure></p>
+  	
+					
+	  </div>     
+	  
+
+	
+<div class="post-meta">
+      
+        <i class="iconfont icon-category"></i>       
+        <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/Vue/">Vue</a> 	
+     
+      	
+
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/webpack/">webpack</a> <a class="tag-link" href="/tags/优化/">优化</a>    
+      	
+</div>
+
+
+
+
+
+<div class="post-footer">
+  <div class="pf-left">
+      <img class="pf-avatar" src="/images/header.jpg">
+      <p class="pf-des">走失在穿暖花开处</p>
+  </div>
+
+  <div class="pf-right">           
+      <div class="pf-links">
+         
+        
+      </div>  
+    <nav class="pf-paginator">
+      
+         
+          <a href="/2018/07/07/vue-special-remarks/" data-hover="Vue 开发中遇到的问题及解决">上一篇</a>      
+            
+        
+      
+        
+        <a href="/2018/07/07/css-box-reflect/" data-hover="使用CSS3制作倒影 box-reflect"> 下一篇</a>
+            
+  </nav>   
+  </div>
+</div>
+<div id="comment"></div> 
+	
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+
+        
+        <div class="search-container sildeUpMin">
+
+
+            <div class="search-header">
+            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
+            <span class="search-cancel iconfont icon-cancel"></span>
+          
+            </div>
+              
+            <div id="search-result" class="search-result"></div>
+
+        </div>
+ 
+
+     <div class="mobile-menu">      
+
+      
+       <a href="/">
+      <img class="mobile-menu-icon" src="/images/favicon.png">
+       </a>
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">时间轴
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>        
+    
+
+
+
+     
+    
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">	    
+
+
+		<div class="footer-copyright">
+		&copy;
+				
+		2017-
+		
+		2018
+
+		Jordon Wang
+			<br>
+			<span id="busuanzi_container_site_pv">
+				<span class="iconfont icon-pv"></span>
+				<span id="busuanzi_value_site_pv"></span>
+			</span> |
+			<span id="busuanzi_container_site_uv">
+				<span class="iconfont icon-uv"></span>
+				<span id="busuanzi_value_site_uv"></span>
+			</span>
+		<br>
+			Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+			Theme By
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
