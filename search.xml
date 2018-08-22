@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Exif.js 读取图像的元数据，判断上传图片方向是否正确]]></title>
+    <url>%2F2018%2F08%2F22%2FExifjs%2F</url>
+    <content type="text"><![CDATA[有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，可借助Exif.js实现。 Exif.js 提供了 JavaScript 读取图像的原始数据的功能扩展，例如：拍照方向、相机设备型号、拍摄时间、ISO 感光度、GPS 地理位置等数据。 有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，Exif.js可实现，代码如下：1&lt;script src="exif.js"&gt;&lt;/script&gt; 123456789101112EXIF.getData(imgElement, function()&#123; EXIF.getAllTags(this); //获取图像的全部数据，值以对象的方式返回 EXIF.pretty(this); //获取图像的全部数据，值以字符串的方式返回 var orientation = EXIF.getTag(this, 'Orientation'); //获取图像的某个数据 if (orientation == 3) &#123; //旋转180度 &#125; else if (orientation == 6) &#123; //旋转90度 &#125; else if (orientation == 8) &#123; //旋转270度 &#125;;&#125;); Demo获取用户上传图片方向 官方示例Exif.js 读取图像的元数据]]></content>
+      <categories>
+        <category>前端</category>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>WEB</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Vue 开发中遇到的问题及解决]]></title>
     <url>%2F2018%2F07%2F07%2Fvue-special-remarks%2F</url>
     <content type="text"><![CDATA[以下记录在开发Vue项目中遇到的相关问题及解决办法，不定期更新。 在微信中使用Vue项目如涉及微信支付，路由模式应使用哈希模式，且在支付页面需特殊处理，不然会有支付权限的问题。12345var pos = location.href.indexOf('#')var my_url = location.href.split('#')if (location.href[pos - 1] !== '?') &#123; location.href = my_url[0] + '?#' +my_url[1]&#125; 页面中报错[Vue warn]: Invalid value for option “components”: expected an Object, but got Array.在开发过程中发现这个错误，很明显是提升配置组件时对应的值应该是一个对象不是数组，但是找遍了自己所有的页面和组件中都没有写错，此时该联想到是不是第三方的库版本太老旧引起的。我最终发现我出现这个报错的原因是引用了太旧版本的bootstarp-vue引起的。升级到新一点的版本久没有问题了。 页面中报错Injection “elFormItem” not found这个错误是ElementUI引起的，原因是ElementUI过高或是Vue过低引起，都升级到最新版即可。 Vue_cli npm run dev时报错No parser and no filepath given, using ‘babylon’ the parser now but this will throw an error in the future. Please specify a parser or a filepath so one can be inferred.是prettier模块导致的报错，查了下发现In prettier 1.13.0, default parser was removed with a minor version(used to be babylon), this breaks the formatter here.意思是在prettier的 1.13.0版本，默认的一个解析器被移除了导致项目创建失败解决办法把node_modules里的prettier删掉，重现下个之前的版本 npm install prettier@~1.12.0再运行就可以了参考 chrome devtools 工具vue不可使用,提示Vue.js is detected on this page. Devtools inspection is not available because it&#39;s in production mode or explicitly disabled by the author应该引用开发版本的vue.js而不是压缩版本vue.min.js。 使用vue-cli的项目开发环境通过loaclhost可以访问，但不能通过ip访问（在app内嵌入web网页在开发环境指向自己的本机电脑启动的服务，通过IP不能访问，提示访问被拒绝）修改config/index.js host: ‘localhost’ 改为 host: ‘0.0.0.0’, 开发环境调用后台接口跨域修改config/index.js;将所有的接口都加上一个特殊的字段（我这里的用的api匹配），在代理这层匹配成功后会代理到目标地址。123456789proxyTable: &#123; '/api': &#123; target: 'http://example.com', changeOrigin: true, pathRewrite:&#123; '/api':'' &#125; &#125;,&#125;]]></content>

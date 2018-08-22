@@ -7,7 +7,7 @@
   <meta name="description" content="前端开发者，个人博客">
     
   
-  <title>  Css |   Felinae </title>
+  <title>  Exif.js 读取图像的元数据，判断上传图片方向是否正确 |   Felinae </title>
 
  
   
@@ -70,7 +70,7 @@
       <div class="container">       
           
           
-            <section class="main slideDownMin">
+            <section class="main">  
           
 
           <article class="post">
@@ -78,16 +78,21 @@
 	<div class="post-header">
 
 	<p class="post-title">	
-		css
+		Exif.js 读取图像的元数据，判断上传图片方向是否正确
 	</p>
 			
 
 	<div class="meta-info">	
 	<span>
-		7月 07, 2018
+		8月 22, 2018
 	</span>
 
 	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			586
+		</span>
 	
 </div>
 
@@ -99,15 +104,30 @@
 		
 
 			
-					  	
+					<p>有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，可借助Exif.js实现。<br><a id="more"></a></p>
+<blockquote>
+<p>Exif.js 提供了 JavaScript 读取图像的原始数据的功能扩展，例如：拍照方向、相机设备型号、拍摄时间、ISO 感光度、GPS 地理位置等数据。</p>
+</blockquote>
+<h4 id="有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，Exif-js可实现，代码如下："><a href="#有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，Exif-js可实现，代码如下：" class="headerlink" title="有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，Exif.js可实现，代码如下："></a>有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，Exif.js可实现，代码如下：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"exif.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">EXIF.getData(imgElement, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">  EXIF.getAllTags(<span class="keyword">this</span>);  <span class="comment">//获取图像的全部数据，值以对象的方式返回</span></span><br><span class="line">  EXIF.pretty(<span class="keyword">this</span>);  <span class="comment">//获取图像的全部数据，值以字符串的方式返回</span></span><br><span class="line">  <span class="keyword">var</span> orientation = EXIF.getTag(<span class="keyword">this</span>, <span class="string">'Orientation'</span>); <span class="comment">//获取图像的某个数据</span></span><br><span class="line">  <span class="keyword">if</span> (orientation == <span class="number">3</span>) &#123;</span><br><span class="line">      <span class="comment">//旋转180度</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (orientation == <span class="number">6</span>) &#123;</span><br><span class="line">      <span class="comment">//旋转90度</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (orientation == <span class="number">8</span>) &#123;</span><br><span class="line">      <span class="comment">//旋转270度</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h5><p><a href="https://jordonwang.github.io/demo/%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E6%96%B9%E5%90%91.html">获取用户上传图片方向</a></p>
+<h5 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h5><p><a href="http://code.ciaoca.com/javascript/exif-js/demo/upfile" target="_blank" rel="noopener">Exif.js 读取图像的元数据</a></p>
+  	
 					
 	  </div>     
 	  
 
 	
 <div class="post-meta">
+      
+        <i class="iconfont icon-category"></i>       
+        <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/JS/">JS</a> 	
+     
       	
 
+      
+        <i class="iconfont icon-tag"></i>     
+          <a class="tag-link" href="/tags/WEB/">WEB</a>    
       	
 </div>
 
@@ -129,6 +149,9 @@
     <nav class="pf-paginator">
            
         
+      
+        
+        <a href="/2018/07/07/vue-special-remarks/" data-hover="Vue 开发中遇到的问题及解决"> 下一篇</a>
             
   </nav>   
   </div>
