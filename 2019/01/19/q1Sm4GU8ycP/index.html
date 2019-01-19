@@ -104,7 +104,7 @@
 		
 
 			
-					<p>Git 中的 HEAD 可以理解为一个指针，我们可以在命令行中输入 cat .git/HEAD 查看当前 HEAD 指向哪儿，一般它指向当前工作目录所在分支的最新提交。<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat .git/HEAD</span><br><span class="line"><span class="symbol">ref:</span> refs<span class="meta-keyword">/heads/</span><span class="params">&lt;branch name&gt;</span>  <span class="comment">// 正常</span></span><br><span class="line">cad0be9ceb89f474c39360c4de337d4a8194cab0 <span class="comment">// 游离状态</span></span><br></pre></td></tr></table></figure></p>
+					<p>Git 中的 HEAD 可以理解为一个指针，我们可以在命令行中输入 cat .git/HEAD 查看当前 HEAD 指向哪儿，一般它指向当前工作目录所在分支的最新提交。<br><a id="more"></a><br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat .git/HEAD</span><br><span class="line"><span class="symbol">ref:</span> refs<span class="meta-keyword">/heads/</span><span class="params">&lt;branch name&gt;</span>  <span class="comment">// 正常</span></span><br><span class="line">cad0be9ceb89f474c39360c4de337d4a8194cab0 <span class="comment">// 游离状态</span></span><br></pre></td></tr></table></figure></p>
 <p>使用git checkout 来移动HEAD指针，移动的对象可以是分支指针也可以是快照。<br>HEAD指针可以指向快照也可以指向branch。当指向branch时提交后会和branch指针一起向后移动，当不指向branch提交时时则会在一个detached状态。</p>
 <p>当使用 git checkout &lt; branch_name&gt; 切换分支时，HEAD 会移动到指定分支。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch <span class="built_in">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>但是如果使用的是 git checkout <commit id="">，即切换到指定的某一次提交，HEAD 就会处于 detached 状态（游离状态）<br><img src="https://upload-images.jianshu.io/upload_images/10832850-61e0553e78afd1e3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用webStorm checkout"></commit></p>
@@ -157,7 +157,7 @@
         
       
         
-        <a href="/2018/08/25/frRRlgpqTOlGLHA/" data-hover="sdfsfs"> 下一篇</a>
+        <a href="/2018/08/22/Exifjs/" data-hover="Exif.js 读取图像的元数据，判断上传图片方向是否正确"> 下一篇</a>
             
   </nav>   
   </div>

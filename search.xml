@@ -12,21 +12,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[sdfsfs]]></title>
-    <url>%2F2018%2F08%2F25%2FfrRRlgpqTOlGLHA%2F</url>
-    <content type="text"><![CDATA[欢迎使用 Cmd Markdown 编辑阅读器我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，Cmd Markdown 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown： 整理知识，学习笔记 发布日记，杂文，所见所想 撰写发布技术文稿（代码支持） 撰写发布学术论文（LaTeX 公式支持） 除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载： Windows/Mac/Linux 全平台客户端]]></content>
-      <categories>
-        <category>Web</category>
-        <category>www</category>
-        <category>eee</category>
-      </categories>
-      <tags>
-        <tag>标签一</tag>
-        <tag>标签二</tag>
-        <tag>标签三</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Exif.js 读取图像的元数据，判断上传图片方向是否正确]]></title>
     <url>%2F2018%2F08%2F22%2FExifjs%2F</url>
     <content type="text"><![CDATA[有时候需要对用户上传的图片判断方向是否正确，此时需要知道原图片的拍摄信息，可借助Exif.js实现。 Exif.js 提供了 JavaScript 读取图像的原始数据的功能扩展，例如：拍照方向、相机设备型号、拍摄时间、ISO 感光度、GPS 地理位置等数据。 代码如下：1&lt;script src="exif.js"&gt;&lt;/script&gt; 123456789101112EXIF.getData(imgElement, function()&#123; EXIF.getAllTags(this); //获取图像的全部数据，值以对象的方式返回 EXIF.pretty(this); //获取图像的全部数据，值以字符串的方式返回 var orientation = EXIF.getTag(this, 'Orientation'); //获取图像的某个数据 if (orientation == 3) &#123; //旋转180度 &#125; else if (orientation == 6) &#123; //旋转90度 &#125; else if (orientation == 8) &#123; //旋转270度 &#125;;&#125;); Demo获取用户上传图片方向 官方示例Exif.js 读取图像的元数据]]></content>

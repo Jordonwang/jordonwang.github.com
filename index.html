@@ -121,82 +121,13 @@
 
     
 	<div class="article-excerpt">	
-		 
-			<p>Git 中的 HEAD 可以理解为一个指针，我们可以在命令行中输入 cat .git/HEAD 查看当前 HEAD 指向哪儿，一般它指向当前工作目录所在分支的最新提交。<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat .git/HEAD</span><br><span class="line"><span class="symbol">ref:</span> refs<span class="meta-keyword">/heads/</span><span class="params">&lt;branch name&gt;</span>  <span class="comment">// 正常</span></span><br><span class="line">cad0be9ceb89f474c39360c4de337d4a8194cab0 <span class="comment">// 游离状态</span></span><br></pre></td></tr></table></figure></p>
-<p>使用git checkout 来移动HEAD指针，移动的对象可以是分支指针也可以是快照。<br>HEAD指针可以指向快照也可以指向branch。当指向branch时提交后会和branch指针一起向后移动，当不指向branch提交时时则会在一个detached状态。</p>
-<p>当使用 git checkout &lt; branch_name&gt; 切换分支时，HEAD 会移动到指定分支。<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch <span class="built_in">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>但是如果使用的是 git checkout <commit id="">，即切换到指定的某一次提交，HEAD 就会处于 detached 状态（游离状态）<br><img src="https://upload-images.jianshu.io/upload_images/10832850-61e0553e78afd1e3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用webStorm checkout"></commit></p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;commit <span class="built_in">id</span>&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="HEAD-游离状态的利与弊"><a href="#HEAD-游离状态的利与弊" class="headerlink" title="HEAD 游离状态的利与弊"></a>HEAD 游离状态的利与弊</h3><p>利: 我们可以很方便地在历史版本之间互相切换，比如需要回到某次提交，直接 checkout 对应的 commit id 或者 tag 名即可。</p>
-<p>弊：在这个基础上的提交会新开一个匿名分支且提交是无法可见保存的，一旦切到别的分支，游离状态以后的提交就不可追溯了。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line">* (<span class="name">HEAD</span> detached at <span class="number">925</span>fda6)</span><br><span class="line">master</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/10832850-1dbe926bf1c27e8f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="在游离状态无法提交修改"></p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>1，查看当前分支状态<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br><span class="line">* (<span class="name">HEAD</span> detached at <span class="number">925</span>fda6)</span><br><span class="line">master</span><br></pre></td></tr></table></figure></p>
-<p>2，新建一个临时 tem 分支，把当前提交的代码放到整个分支<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">branch </span>tem</span><br><span class="line"><span class="symbol">git</span> checkout tem</span><br></pre></td></tr></table></figure></p>
-<p>3，换回要回到的那个分支，这里是 master<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="literal">master</span></span><br></pre></td></tr></table></figure></p>
-<p>4，然后 merge 刚才创建的临时分支<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git merge tem</span><br><span class="line">Updating cad0be9..<span class="number">2437</span>c6b</span><br><span class="line">Fast-forward</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
-<p>5，检查是否有冲突，没有就提交到远端<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</span><br></pre></td></tr></table></figure></p>
-<p>6，删除临时分支<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">branch </span>-d tem</span><br></pre></td></tr></table></figure></p>
-
+		
+			<p>Git 中的 HEAD 可以理解为一个指针，我们可以在命令行中输入 cat .git/HEAD 查看当前 HEAD 指向哪儿，一般它指向当前工作目录所在分支的最新提交。<br>
 		  	  
-	</div>
+	</p></div>
 
 	<div class="article-bottom">
 		<a class="article-readmore" href="/2019/01/19/q1Sm4GU8ycP/">阅读更多</a> 	</div>	
-    
-</article>     
-     	
-      	  	
-
-  		
-    	<article class="article">		
-	   
-	<div class="article-header">
-	    
-	     <a class="article-title" href="/2018/08/25/frRRlgpqTOlGLHA/">sdfsfs</a>  
-	       
-		 
-
-		<div class="article-meta">
-		
-		8月 25, 2018
-
-		
-			<span class="iconfont icon-star"></span>		 
-			            
-			<a class="article-tag" href="/tags/标签一/">标签一</a>           
-			            
-			<a class="article-tag" href="/tags/标签二/">标签二</a>           
-			            
-			<a class="article-tag" href="/tags/标签三/">标签三</a>           
-			
-		
-		</div>
-
-	</div>
-
-
-	
-
-    
-	<div class="article-excerpt">	
-		 
-			<h1 id="欢迎使用-Cmd-Markdown-编辑阅读器"><a href="#欢迎使用-Cmd-Markdown-编辑阅读器" class="headerlink" title="欢迎使用 Cmd Markdown 编辑阅读器"></a>欢迎使用 Cmd Markdown 编辑阅读器</h1><p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
-<blockquote>
-<ul>
-<li>整理知识，学习笔记</li>
-<li>发布日记，杂文，所见所想</li>
-<li>撰写发布技术文稿（代码支持）</li>
-<li>撰写发布学术论文（LaTeX 公式支持）</li>
-</ul>
-</blockquote>
-<p><img src="https://www.zybuluo.com/static/img/logo.png" alt="cmd-markdown-logo"></p>
-<p>除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：</p>
-<h3 id="Windows-Mac-Linux-全平台客户端"><a href="#Windows-Mac-Linux-全平台客户端" class="headerlink" title="Windows/Mac/Linux 全平台客户端"></a><a href="https://www.zybuluo.com/cmd/" target="_blank" rel="noopener">Windows/Mac/Linux 全平台客户端</a></h3>
-		  	  
-	</div>
-
-	<div class="article-bottom">
-		<a class="article-readmore" href="/2018/08/25/frRRlgpqTOlGLHA/">阅读更多</a> 	</div>	
     
 </article>     
      	
@@ -359,7 +290,7 @@
 		
 			<p><html></html></p>
 <p></p><p style="-webkit-box-reflect: below 1px -webkit-linear-gradient(transparent,transparent 15%,rgba(0,0,0,.4));font-size: 20px;">CSS3中的box-reflect特性可以实现对图片和文字的倒影效果。</p><br><p></p>
-<p><html><img style="-webkit-box-reflect: below 1px -webkit-linear-gradient(transparent,transparent 30%,rgba(0,0,0,.4));" src="/images/placeholder.png" data-src="https://gw.alipayobjects.com/os/q/cms/images/jjb2or1y/1e5ea903-12df-4dc8-a823-41cd66f6258c_w500_h277.jpeg" class="lazyload"></html><br>
+<p><html><img style="-webkit-box-reflect: below 1px -webkit-linear-gradient(transparent,transparent 30%,rgba(0,0,0,.4));" src="https://gw.alipayobjects.com/os/q/cms/images/jjb2or1y/1e5ea903-12df-4dc8-a823-41cd66f6258c_w500_h277.jpeg"></html><br>
 		  	  
 	</p></div>
 
@@ -448,6 +379,51 @@
     
 </article>     
      	
+      	  	
+
+  		
+    	<article class="article">		
+	   
+	<div class="article-header">
+	    
+	     <a class="article-title" href="/2018/05/25/html5-video-compatible/">移动端Web Video视频播放兼容处理</a>  
+	       
+		 
+
+		<div class="article-meta">
+		
+		5月 25, 2018
+
+		
+			<span class="iconfont icon-star"></span>		 
+			            
+			<a class="article-tag" href="/tags/WEB/">WEB</a>           
+			            
+			<a class="article-tag" href="/tags/移动端/">移动端</a>           
+			            
+			<a class="article-tag" href="/tags/兼容/">兼容</a>           
+			
+		
+		</div>
+
+	</div>
+
+
+	
+
+    
+	<div class="article-excerpt">	
+		
+			<blockquote>
+<p>最近因为项目中用到了视频播放，所以使用了HTML5中的video标签，但是遇到了的各种兼容问题。背景：项目运行在支付宝内的网页，被第三方测试机构测出安卓和IOS中视觉不一样。<br>
+		  	  
+	</p></blockquote></div>
+
+	<div class="article-bottom">
+		<a class="article-readmore" href="/2018/05/25/html5-video-compatible/">阅读更多</a> 	</div>	
+    
+</article>     
+     	
   
 
  
@@ -502,7 +478,7 @@
 
       
        <a href="/">
-      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">
+      <img class="mobile-menu-icon" src="/images/favicon.png">
        </a>
       
 
