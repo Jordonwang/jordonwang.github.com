@@ -91,7 +91,7 @@
 	
 		<i class="iconfont icon-words"></i>
 		<span>
-			2155
+			2156
 		</span>
 	
 </div>
@@ -104,7 +104,8 @@
 		
 
 			
-					<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><h5 id="正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。"><a href="#正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。" class="headerlink" title="正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。"></a>正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。</h5><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h5 id="因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下："><a href="#因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下：" class="headerlink" title="因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下："></a>因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下：</h5><h5 id="1、在客户端生成一对密钥（如已生成过，可跳过此步骤）"><a href="#1、在客户端生成一对密钥（如已生成过，可跳过此步骤）" class="headerlink" title="1、在客户端生成一对密钥（如已生成过，可跳过此步骤）"></a>1、在客户端生成一对密钥（如已生成过，可跳过此步骤）</h5><p>基于空口令生成一个新的ssh密钥，以实现无密码登录：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">''</span> -f ~<span class="regexp">/.ssh/i</span>d_rsa</span><br></pre></td></tr></table></figure></p>
+					<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><h5 id="正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。"><a href="#正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。" class="headerlink" title="正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。"></a>正常前端代码开发完成，部署代码需连接xshell或者SFTP工具进入到项目目录，更换静态文件才能完成部署。为提高前端部署效率，不再手动通过工具连接远程替换代码，在本地使用脚本完成远程连接及代码部署。</h5><a id="more"></a>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><h5 id="因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下："><a href="#因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下：" class="headerlink" title="因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下："></a>因为使用脚本登录远程服务器，需使用到ssh的免密码登录（基于密钥），实现流程如下：</h5><h5 id="1、在客户端生成一对密钥（如已生成过，可跳过此步骤）"><a href="#1、在客户端生成一对密钥（如已生成过，可跳过此步骤）" class="headerlink" title="1、在客户端生成一对密钥（如已生成过，可跳过此步骤）"></a>1、在客户端生成一对密钥（如已生成过，可跳过此步骤）</h5><p>基于空口令生成一个新的ssh密钥，以实现无密码登录：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">''</span> -f ~<span class="regexp">/.ssh/i</span>d_rsa</span><br></pre></td></tr></table></figure></p>
 <p>参数说明： </p>
 <p>-t 加密算法类型，这里是使用rsa算法 </p>
 <p>-P 指定私钥的密码，不需要可以不指定 </p>
