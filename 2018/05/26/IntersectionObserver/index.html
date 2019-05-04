@@ -1,13 +1,11 @@
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<!DOCTYPE html>
 <html>
-  <head>
+  <head><meta name="generator" content="Hexo 3.8.0">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <meta name="keywords" content="javascript,node,jquery,git,编程,开发,网络,互联网,web,web前端,前端,h5,html5,css3,css,html,js">
-  <meta name="description" content="前端开发者，个人博客">
-    
   
-  <title>  IntersectionObserver使用 |   Felinae </title>
+  
+  <title>  IntersectionObserver使用 |   城南 </title>
 
  
   
@@ -15,98 +13,130 @@
   
 
 
-  <link rel="stylesheet" href="/nayo.min.css">
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine@1.1.9-beta9/dist/Valine.min.js"></script>
-</head>  
-  <body>   
-    
-      <header class="header">
-	
-  <nav class="header-nav">        
-   
-    <span class="iconfont icon-menu mobile-toggle"></span>   	
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>
+  <body>
 
-    <a class="header-logo" href="/">
-        <i>F</i><i>e</i><i>l</i><i>i</i><i>n</i><i>a</i><i>e</i>
-    </a>
-    <div class="header-menu header-menu-block">
-              
-            
 
-              <a class="header-menu-link" id="header-menu-archives" href="/archives">时间轴</a>     
 
-            
-            
-            
+      <div class="container">
 
-              <a class="header-menu-link" id="header-menu-tags" href="/tags">标签</a>     
+          
+            <div class="container-inner">
+          
 
-            
-            
-            
+          <header class="header-wrapper">
 
-              <a class="header-menu-link" id="header-menu-about" href="/about">关于</a>     
-
-            
-            
-            
-
-              <!--<a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>-->
-
-            
-                
-    </div>  
-    <div class="header-menu">
-        <a class="iconfont icon-menu-search header-menu-link" id="header-menu-search"></a>
+  <nav class="inner">
+    <div class="title">
+      <a href="/">
+        <img class="logo" src="/images/logo.png">
+      </a>
     </div>
+
+    <ul class="menu">
+      
+      
+      <li class="item">
+        <a class="link" id="menu-home" href="/">
+          首页
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-archives" href="/archives">
+          文章
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-tags" href="/tags">
+          标签
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-about" href="/about">
+          关于
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-search">
+          搜索
+          <!--<i class="iconfont icon-search" />-->
+        </a>
+        
+
+        
+      
+    </li></ul>
   </nav>
 </header>
-<!--<div class="lights">-->
-    <!--<img src="https://gw.alipayobjects.com/os/q/cms/images/jhn0yc59/828a36ab-acd9-4492-a6d3-9edfde153a49_w64_h64.png" alt="">-->
-<!--</div>-->
-<!--<canvas id="stage" class="stage hide" width="507" height="718"></canvas>-->   
 
-      <div class="container">       
-          
-          
-            <section class="main">  
-          
+<header class="mobile-header-wrapper">
+  <i id="mobile-toggle" class="iconfont icon-menu mobile-toggle"></i>
+</header>
 
-          <article class="post">
-  
-	<div class="post-header">
+<article class="post slideDownMin">
 
-	<p class="post-title">	
-		IntersectionObserver使用
-	</p>
+	
+<div class="header">
+		<p class="title">	
+			IntersectionObserver使用
+		</p>
+		<div class="info">	
+			<time>
+				5月 26, 2018
+			</time>
+
 			
-
-	<div class="meta-info">	
-	<span>
-		5月 26, 2018
-	</span>
-
-	
-	
-		<i class="iconfont icon-words"></i>
-		<span>
-			2146
-		</span>
-	
+			
+				<i class="iconfont icon-words"></i>
+				<span class="words">2146
+				</span>
+			
+		</div>
 </div>
+	
 
-</div> 
-	 
+    <script type="text/x-mathjax-config">
+        var post = document.getElementsByClassName("post")[0];  
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none",    
+            tex2jax: {
+                inlineMath:  [ ["$", "$"] , ["\\(","\\)"]],
+                displayMath: [ ["$$","$$"] , ["\\[","\\]"]],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+            },
+            "HTML-CSS": {            
+                showMathMenu: false
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,post]);
+    </script>
+    <style>.MathJax{outline:0;}</style>
 
-	  <div class="post-content slideDownMin">
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.2/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	  <div class="typo post-content ">
 
 		
 
 			
 					<p>IntersectionObserver用来监听一个目标元素是否出现在web页面的可视区域。<br><a id="more"></a><br>传统方式监听一个元素是否出现在可视区，可以监听scroll事件，计算目标元素距离顶部的距离减去页面滑出的距离；如果大于0且小于窗口的高度则表明是可见的。<br><figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">0 </span>&lt; $(<span class="string">"targetDom"</span>).offset().top - $(document).scrollTop() &lt; $(<span class="keyword">window</span>).height()</span><br></pre></td></tr></table></figure></p>
 <p>但是此方法需监听scroll事件，对性能要求高。</p>
-<h5 id="IntersectionObserver-API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）"><a href="#IntersectionObserver-API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）" class="headerlink" title="IntersectionObserver API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）"></a>IntersectionObserver API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）</h5><figure class="highlight pony"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 创建一个观察实例</span><br><span class="line"><span class="keyword">var</span> io = <span class="function"><span class="keyword">new</span> <span class="title">IntersectionObserver</span>(callback, option);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 开始观察</span></span></span><br><span class="line"><span class="function"><span class="title">io</span>.<span class="title">observe</span>(document.getElementById('example'));</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 停止观察</span></span></span><br><span class="line"><span class="function"><span class="title">io</span>.<span class="title">unobserve</span>(element);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="comment">// 关闭观察器</span></span></span><br><span class="line"><span class="function"><span class="title">io</span>.<span class="title">disconnect</span>();</span></span><br></pre></td></tr></table></figure>
+<h5 id="IntersectionObserver-API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）"><a href="#IntersectionObserver-API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）" class="headerlink" title="IntersectionObserver API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）"></a>IntersectionObserver API，可以自动”观察”元素是否可见，IntersectionObserver是浏览器原生提供的一个构造函数，第一个参数元素可见性发生变化的回调函数，第二个是配置参数（可选）</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 创建一个观察实例</span><br><span class="line"><span class="keyword">var</span> io = <span class="keyword">new</span> IntersectionObserver(callback, option);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 开始观察</span></span><br><span class="line">io.observe(<span class="built_in">document</span>.getElementById(<span class="string">'example'</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止观察</span></span><br><span class="line">io.unobserve(element);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关闭观察器</span></span><br><span class="line">io.disconnect();</span><br></pre></td></tr></table></figure>
 <h5 id="callback"><a href="#callback" class="headerlink" title="callback"></a>callback</h5><p>callback会在元素刚开始进入视线和完全离开视线触发：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> io = <span class="keyword">new</span> IntersectionObserver(</span><br><span class="line">  entries =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(entries);</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
 <p>回调函数返回IntersectionObserverEntry的对象有以下属性：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="symbol">  time:</span> <span class="number">3893.92</span>,</span><br><span class="line"><span class="symbol">  rootBounds:</span> <span class="class">ClientRect </span>&#123;</span><br><span class="line"><span class="symbol">    bottom:</span> <span class="number">920</span>,</span><br><span class="line"><span class="symbol">    height:</span> <span class="number">1024</span>,</span><br><span class="line"><span class="symbol">    left:</span> <span class="number">0</span>,</span><br><span class="line"><span class="symbol">    right:</span> <span class="number">1024</span>,</span><br><span class="line"><span class="symbol">    top:</span> <span class="number">0</span>,</span><br><span class="line"><span class="symbol">    width:</span> <span class="number">920</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="symbol">  boundingClientRect:</span> <span class="class">ClientRect </span>&#123;</span><br><span class="line">     <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="symbol">  intersectionRect:</span> <span class="class">ClientRect </span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line"><span class="symbol">  intersectionRatio:</span> <span class="number">0.54</span>,</span><br><span class="line"><span class="symbol">  target:</span> element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒</span><br><span class="line"><span class="keyword">target</span>：被观察的目标元素，是一个 DOM 节点对象</span><br><span class="line">rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回<span class="keyword">null</span></span><br><span class="line">boundingClientRect：目标元素的矩形区域的信息</span><br><span class="line">intersectionRect：目标元素与视口（或根元素）的交叉区域的信息</span><br><span class="line">intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为<span class="number">1</span>，完全不可见时小于等于<span class="number">0</span></span><br></pre></td></tr></table></figure>
@@ -116,97 +146,141 @@
 <p>上面代码中，除了root属性，还有rootMargin属性。后者定义根元素的margin，用来扩展或缩小rootBounds这个矩形的大小，从而影响intersectionRect交叉区域的大小。它使用CSS的定义方法，比如10px 20px 30px 40px，表示 top、right、bottom 和 left 四个方向的值。<br>这样设置以后，不管是窗口滚动或者容器内滚动，只要目标元素可见性变化，都会触发观察器。</p>
 <h5 id="IntersectionObserver-API-是异步触发"><a href="#IntersectionObserver-API-是异步触发" class="headerlink" title="IntersectionObserver API 是异步触发"></a>IntersectionObserver API 是异步触发</h5><p>只有线程空闲下来，才会执行观察器。这意味着，这个观察器的优先级非常低，只在其他任务执行完，浏览器有了空闲才会执行。</p>
 <h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html" target="_blank" rel="noopener">IntersectionObserver API 使用教程</a></p>
-  	
-					
-	  </div>     
-	  
 
-	
-<div class="post-meta">
+			
+	  </div>
+
+
+	<div class="bottom">
+  <div class="other">
+    <div class="meta">
       
-        <i class="iconfont icon-category"></i>       
-        <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/JS/">JS</a> 	
-     
-      	
+      <i class="iconfont icon-category"></i>
+      <a class="category-link" href="/categories/fontend/">前端</a> <a class="category-link" href="/categories/fontend/JS/">JS</a>
 
       
-        <i class="iconfont icon-tag"></i>     
-          <a class="tag-link" href="/tags/WEB/">WEB</a>    
-      	
-</div>
 
+      
+      <i class="iconfont icon-tag"></i>
+      <a class="tag-link" href="/tags/WEB/">WEB</a>
+      
+    </div>
 
+    <div class="operate">
+      
+      <span class="text">Share</span>
+      <ul class="share">
+	   			             
+        <li class="iconfont 
+		icon-share-qq 
+		-mob-share-qq 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weixin 
+		-mob-share-weixin 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weibo 
+		-mob-share-weibo 
+		item"></li>		
+   	   
+</ul>	
 
-
-
-<div class="post-footer">
-  <div class="pf-left">
-      <img class="pf-avatar" src="/images/header.jpg">
-      <p class="pf-des">走失在春暖花开处</p>
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+      
+    </div>
   </div>
 
-  <div class="pf-right">           
-      <div class="pf-links">
-         
-        
-      </div>  
-    <nav class="pf-paginator">
-      
-         
-          <a href="/2018/06/06/emoji-string/" data-hover="前端emoji表情字符串处理">上一篇</a>      
-            
-        
-      
-        
-        <a href="/2018/05/25/html5-video-compatible/" data-hover="移动端Web Video视频播放兼容处理"> 下一篇</a>
-            
-  </nav>   
-  </div>
-</div>
-<div id="comment"></div> 
-	
-	
-</article>
-
-          </section> 
-      </div>            
-    
-    <a id="backTop">
-      <span>
-        <i class="iconfont icon-backtotop"></i>
-      </span>
-    </a> 
 
   
+  <nav class="nav">
+    <div class="link">
+      
+      <a href="/2018/05/25/html5-video-compatible/" class="link-wrap">
+        <strong class="caption">older</strong>
+        
+        <span class="title">
+          移动端Web Video视频播放兼容处理
+        </span>
+      </a>
+      
+    </div>
+    <div class="link">
+      
+      <a href="/2018/06/06/emoji-string/" class="link-wrap">
+        <strong class="caption">newer</strong>
+        
+        <span class="title">
+          前端emoji表情字符串处理
+        </span>
+      </a>
+      
+    </div>
+  </nav>
+  
+</div>
+	
+<div class="comment">
+
     
 
+    <div id="comment">
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src="//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+            app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',
+            path: window.location.pathname,
+            avatar: 'mm',
+            guest_info: ['nick', 'mail']
+        });
+    </script>
+    
+</div>
+</article>
+
+
+          </div>
+      </div>
+
+        <i id="toTop" class="iconfont icon-backtotop"></i>
+
+
+    <div class="none" id="search">
+    <div class="header">
+        <input type="text" placeholder="输入你想搜索的" id="search-input" class="input">
         
-        <div class="search-container sildeUpMin">
+        <i id="search-cancel" class="iconfont icon-cancel"></i>
+    </div>
 
-
-            <div class="search-header">
-            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">  
-            <span class="search-cancel iconfont icon-cancel"></span>
-          
-            </div>
-              
-            <div id="search-result" class="search-result"></div>
-
-        </div>
- 
-
+    <div id="search-result" class="result"></div>
+</div>
      <div class="mobile-menu">      
 
       
-       <a href="/">
-      <img class="mobile-menu-icon" src="/images/favicon.png">
-       </a>
+      <img class="mobile-menu-icon" src="/images/favicon.png">  
       
 
          
             
 
-            <a class="mobile-menu-link" href="/archives">时间轴
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">文章
             </a>
             
          
@@ -228,47 +302,30 @@
             
          
       
-</div>        
+</div>
+
     
 
 
 
-     
-    
+
+    <!--
 
 
+<footer class="footer">
+	<div class="inner">
+		<div class="copyright">
+			&copy;
+			
+			2019
+			城南
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<footer id="footer">	    
-
-
-		<div class="footer-copyright">
-		&copy;
-				
-		2017-
-		
-		2019
-
-		Jordon Wang
 			<br>
-			<span id="busuanzi_container_site_pv">
-				<span class="iconfont icon-pv"></span>
-				<span id="busuanzi_value_site_pv"></span>
-			</span> |
-			<span id="busuanzi_container_site_uv">
-				<span class="iconfont icon-uv"></span>
-				<span id="busuanzi_value_site_uv"></span>
-			</span>
-		<br>
-			Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-			Theme By
-		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
-		</div>			
-	 
-</footer>   
+			By <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>
+		</div>
+	</div>
+</footer>-->
 
-  
-
-    <script src="/nayo.bundle.js"></script>           
-  </body>        
+    <script src="/nayo.bundle.js"></script>
+  </body>
 </html>
