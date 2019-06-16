@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Vue 项目迁移支付宝小程序 |   城南 </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>
+  <body>
+
+
+
+      <div class="container">
+
+          
+            <div class="container-inner">
+          
+
+          <header class="header-wrapper">
+
+  <nav class="inner">
+    <div class="title">
+      <a href="/">
+        <img class="logo" src="/images/logo.png">
+      </a>
+    </div>
+
+    <ul class="menu">
+      
+      
+      <li class="item">
+        <a class="link" id="menu-home" href="/">
+          首页
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-archives" href="/archives">
+          文章
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-tags" href="/tags">
+          标签
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-about" href="/about">
+          关于
+        </a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-search">
+          搜索
+          <!--<i class="iconfont icon-search" />-->
+        </a>
+        
+
+        
+      
+    </li></ul>
+  </nav>
+</header>
+
+<header class="mobile-header-wrapper">
+  <i id="mobile-toggle" class="iconfont icon-menu mobile-toggle"></i>
+</header>
+
+<article class="post slideDownMin">
+
+	
+<div class="header">
+		<p class="title">	
+			Vue 项目迁移支付宝小程序
+		</p>
+		<div class="info">	
+			<time>
+				6月 16, 2019
+			</time>
+
+			
+			
+				<i class="iconfont icon-words"></i>
+				<span class="words">2730
+				</span>
+			
+		</div>
+</div>
+	
+
+    <script type="text/x-mathjax-config">
+        var post = document.getElementsByClassName("post")[0];  
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none",    
+            tex2jax: {
+                inlineMath:  [ ["$", "$"] , ["\\(","\\)"]],
+                displayMath: [ ["$$","$$"] , ["\\[","\\]"]],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+            },
+            "HTML-CSS": {            
+                showMathMenu: false
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,post]);
+    </script>
+    <style>.MathJax{outline:0;}</style>
+
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.2/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	  <div class="typo post-content ">
+
+		
+
+			
+					<h5 id="公司近期急需上线一个支付宝小程序-和前段时间上线的H5保持一致-H5采用Vue开发-因项目周期太赶-只有一周时间-从项目立项-开发-联调-测试-上线-所有大部分代码采用复制粘贴的方式-记录一些开发过程中的酸甜苦辣"><a href="#公司近期急需上线一个支付宝小程序-和前段时间上线的H5保持一致-H5采用Vue开发-因项目周期太赶-只有一周时间-从项目立项-开发-联调-测试-上线-所有大部分代码采用复制粘贴的方式-记录一些开发过程中的酸甜苦辣" class="headerlink" title="公司近期急需上线一个支付宝小程序,和前段时间上线的H5保持一致,H5采用Vue开发,因项目周期太赶,只有一周时间,从项目立项,开发,联调,测试,上线.所有大部分代码采用复制粘贴的方式.记录一些开发过程中的酸甜苦辣."></a>公司近期急需上线一个支付宝小程序,和前段时间上线的H5保持一致,H5采用Vue开发,因项目周期太赶,只有一周时间,从项目立项,开发,联调,测试,上线.所有大部分代码采用复制粘贴的方式.记录一些开发过程中的酸甜苦辣.</h5><a id="more"></a>
+<h4 id="与微信小程序差异"><a href="#与微信小程序差异" class="headerlink" title="与微信小程序差异"></a>与微信小程序差异</h4><blockquote>
+<p>支付宝小程序是第一次接触,先简单介绍一些和微信小程序的差异对比</p>
+</blockquote>
+<ul>
+<li>JS API 命名空间不同</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">wx.navigateTo</span> =&gt; my.navigateTo</span><br></pre></td></tr></table></figure>
+<ul>
+<li>绑定事件从bind改为on开头，并且采用驼峰形式</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">bindchange</span>=<span class="string">"event"</span> =&gt; <span class="literal">on</span>Change=<span class="string">"event"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>if 和 for语句写法不同</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">wx:</span><span class="keyword">if</span> =&gt; <span class="string">a:</span><span class="keyword">if</span></span><br><span class="line"><span class="string">wx:</span><span class="keyword">for</span> =&gt; <span class="string">a:</span><span class="keyword">for</span></span><br><span class="line"><span class="string">wx:</span>key =&gt; <span class="string">a:</span>key</span><br><span class="line"><span class="string">wx:</span><span class="keyword">for</span>-item =&gt; <span class="string">a:</span><span class="keyword">for</span>-item</span><br><span class="line"><span class="string">wx:</span><span class="keyword">for</span>-index =&gt; <span class="string">a:</span><span class="keyword">for</span>-index</span><br><span class="line"><span class="comment">// 另外支付宝还增加了一个key属性，key 是比 a:key 更通用的写法，里面可以填充任意表达式和字符串。在 for 中使用 key 来提高性能。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>JS API 方法名调整</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wx.request() =&gt; my.httpRequest() <span class="comment">// 网络请求</span></span><br><span class="line">wx.login() =&gt; my.getAuthCode() <span class="comment">// 用户登陆获取授权码</span></span><br><span class="line">wx.showModal() =&gt; my.confirm() <span class="comment">// 确认框</span></span><br><span class="line">wx.getUserInfo() =&gt; my.getAuthUserInfo() <span class="comment">// 获取用户信息</span></span><br><span class="line">wx.requestPayment() =&gt; my.tradePay() <span class="comment">// 支付</span></span><br><span class="line">wx.saveImageToPhotosAlbum() =&gt; my.saveImage() <span class="comment">// 保存在线图片</span></span><br><span class="line">wx.setNavigationBarTitle() =&gt; my.setNavigationBar() <span class="comment">//导航栏标题</span></span><br><span class="line">wx.setNavigationBarColor() =&gt; my.setNavigationBar() <span class="comment">//导航栏颜色</span></span><br><span class="line">wx.getClipboardData() =&gt; my.getClipboard() <span class="comment">//获取剪贴板数据</span></span><br><span class="line">wx.setClipboardData() =&gt; my.setClipboard() <span class="comment">//设置剪贴板数据</span></span><br><span class="line">wx.scanCode() =&gt; my.scan() <span class="comment">// 扫一扫</span></span><br><span class="line"></span><br><span class="line">更多请查阅官方文档</span><br></pre></td></tr></table></figure>
+<ul>
+<li>支付宝多了一个更高性能设置数据的方法 <code>spliceData</code></li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$spliceData(&#123;</span><br><span class="line">	<span class="string">'a.b'</span>:[<span class="number">1</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="从Vue中迁移-vue-gt-小程序"><a href="#从Vue中迁移-vue-gt-小程序" class="headerlink" title="从Vue中迁移  vue =&gt; 小程序"></a>从Vue中迁移  vue =&gt; 小程序</h4><p>1, HTML 替换标签</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">span</span> =&gt; text</span><br><span class="line"><span class="attr">img</span> =&gt; image</span><br><span class="line"><span class="attr">div</span> =&gt; view // 常用的块元素都替换成view</span><br><span class="line"><span class="attr">template</span> =&gt; block</span><br></pre></td></tr></table></figure>
+<p>2, CSS,因在vue中使用了scss,所以需转换成css到小程序中, 并替换对应的标签选择器,如p,ul,li改用其他的选择器</p>
+<p>3, 模板语法替换</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 条件渲染</span></span><br><span class="line">&lt;<span class="selector-tag">div</span> v-<span class="keyword">if</span>=<span class="string">"data == 1"</span>&gt;  =&gt;  &lt;view <span class="selector-tag">a</span>:<span class="keyword">if</span>=<span class="string">"&#123;&#123;data == 1&#125;&#125;"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//列表渲染</span></span><br><span class="line">&lt;<span class="selector-tag">div</span> v-<span class="keyword">for</span>=<span class="string">"(item,index) in List"</span>&gt;  =&gt;  &lt;view <span class="selector-tag">a</span>:<span class="keyword">for</span>=<span class="string">"&#123;&#123;List&#125;&#125;"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据绑定</span></span><br><span class="line">&lt;<span class="selector-tag">div</span> :id=<span class="string">"data"</span>&gt;  =&gt; &lt;view id=<span class="string">"&#123;&#123;data&#125;&#125;"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 事件绑定</span></span><br><span class="line">&lt;<span class="selector-tag">div</span> @click=<span class="string">"event"</span>&gt;  =&gt;  &lt;view onTap=<span class="string">"event"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 路由调整</span></span><br><span class="line">&lt;router-link :to=<span class="string">"&#123;name:'other-page',query:&#123;some-data:data&#125;&#125;"</span>&gt;  =&gt;</span><br><span class="line">&lt;navigator url=<span class="string">"../other-page?some-data=&#123;&#123;data&#125;&#125;"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>4, JS 语法替换</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- methods里面的方法提取到 与小程序的onLoad层级并列</span><br><span class="line">- 赋值 <span class="keyword">this</span>.someData = <span class="number">1</span>  =&gt;  my.setData(&#123;someData: <span class="number">1</span>&#125;)</span><br><span class="line">- 取值 <span class="keyword">this</span>.someData  =&gt; <span class="keyword">this</span>.<span class="keyword">data</span>.someData</span><br><span class="line">- mounted()  =&gt; onShow()</span><br></pre></td></tr></table></figure>
+<p>5, 遇到的问题</p>
+<p>1, 经常会遇到编译后提示<code>程序错误,请前往控制台查看</code>,发生这种情况的原因目前遇到的有以下:</p>
+<ul>
+<li>标签未闭合, 闭合错误</li>
+<li>标签嵌套有误,或是模板语法中获取变量时报错. </li>
+<li>这种错误不会详细提示错误位置,只能通过大量注释代码不断缩小发生错误的范围</li>
+</ul>
+<p>2, 界面显示和实际dom结构不同</p>
+<ul>
+<li>标签未闭合, 闭合错误</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">image</span> src=<span class="string">"XXXXXXXXX"</span> alt /&gt;  <span class="comment">//图片标签一定要闭合,在H5中不闭合一般不会有问题</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>涉及模板变量的不要换行,不然会引起渲染不准确</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">// vue</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;&#123;countDownStr.day&#125;&#125;</span><span class="xml">:</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;&#123;countDownStr.hou&#125;&#125;</span><span class="xml">:</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;&#123;countDownStr.min&#125;&#125;</span><span class="xml">:</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;&#123;countDownStr.sec&#125;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">// 小程序</span></span><br><span class="line"><span class="xml"></span><span class="template-variable">&#123;&#123;countDownStr.day&#125;&#125;</span><span class="xml">:</span><span class="template-variable">&#123;&#123;countDownStr.hou&#125;&#125;</span><span class="xml">:</span><span class="template-variable">&#123;&#123;countDownStr.min&#125;&#125;</span><span class="xml">:</span><span class="template-variable">&#123;&#123;countDownStr.sec&#125;&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>条件判断也不可换行处理</li>
+</ul>
+<figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue</span></span><br><span class="line">&lt;div</span><br><span class="line">    v-<span class="name">if</span>="<span class="title">data</span> &amp;&amp;</span><br><span class="line">    <span class="title">data</span>.a &amp;&amp;</span><br><span class="line">    <span class="title">data</span>.a.b"&gt;</span><br><span class="line"><span class="comment">// 小程序</span></span><br><span class="line">&lt;view a:<span class="name">if</span>="&#123;&#123;<span class="title">data</span> &amp;&amp; <span class="title">data</span>.a &amp;&amp; <span class="title">data</span>.a.b&#125;&#125;"&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h6><p><a href="https://docs.alipay.com/mini/developer/getting-started" target="_blank" rel="noopener">支付宝小程序开发文档</a></p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/" target="_blank" rel="noopener">微信小程序开发文档</a></p>
+
+			
+	  </div>
+
+
+	<div class="bottom">
+  <div class="other">
+    <div class="meta">
+      
+      <i class="iconfont icon-category"></i>
+      <a class="category-link" href="/categories/fontend/">前端</a>
+
+      
+
+      
+      <i class="iconfont icon-tag"></i>
+      <a class="tag-link" href="/tags/Vue/">Vue</a> <a class="tag-link" href="/tags/小程序/">小程序</a>
+      
+    </div>
+
+    <div class="operate">
+      
+      <span class="text">Share</span>
+      <ul class="share">
+	   			             
+        <li class="iconfont 
+		icon-share-qq 
+		-mob-share-qq 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weixin 
+		-mob-share-weixin 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weibo 
+		-mob-share-weibo 
+		item"></li>		
+   	   
+</ul>	
+
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+      
+    </div>
+  </div>
+
+
+  
+  <nav class="nav">
+    <div class="link">
+      
+      <a href="/2019/04/28/7jkAv81CRkRmuC9q/" class="link-wrap">
+        <strong class="caption">older</strong>
+        
+        <span class="title">
+          Vue  如何实现多级组件嵌套通信
+        </span>
+      </a>
+      
+    </div>
+    <div class="link">
+      
+    </div>
+  </nav>
+  
+</div>
+	
+<div class="comment">
+
+    
+
+    <div id="comment">
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src="//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+            app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',
+            path: window.location.pathname,
+            avatar: 'mm',
+            guest_info: ['nick', 'mail']
+        });
+    </script>
+    
+</div>
+</article>
+
+
+          </div>
+      </div>
+
+        <i id="toTop" class="iconfont icon-backtotop"></i>
+
+
+    <div class="none" id="search">
+    <div class="header">
+        <input type="text" placeholder="输入你想搜索的" id="search-input" class="input">
+        
+        <i id="search-cancel" class="iconfont icon-cancel"></i>
+    </div>
+
+    <div id="search-result" class="result"></div>
+</div>
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">  
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">文章
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>
+
+    
+
+
+
+
+    <!--
+
+
+<footer class="footer">
+	<div class="inner">
+		<div class="copyright">
+			&copy;
+			
+			2019
+			城南
+
+			<br>
+			By <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>
+		</div>
+	</div>
+</footer>-->
+
+    <script src="/nayo.bundle.js"></script>
+  </body>
+</html>
